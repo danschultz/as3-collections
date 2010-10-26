@@ -235,11 +235,17 @@ package collections
 				if (areKeysEqual(key, entry.key)) {
 					value = entry.value;
 					
+					// this is the only entry for the hash, so just purge the hash.
 					if (previousEntry == null && entry.next == null) {
 						delete _hashToEntries[hash];
-					} else if (previousEntry == null && entry.next != null) {
+					}
+					// this entry was the first entry in the hash. set the hash to this
+					// entries next entry.
+					else if (previousEntry == null && entry.next != null) {
 						_hashToEntries[hash] = entry.next;
-					} else if (previousEntry != null) {
+					}
+					// remove this entry by removing its reference from the previous entry.
+					else if (previousEntry != null) {
 						previousEntry.next = entry.next;
 					}
 					
