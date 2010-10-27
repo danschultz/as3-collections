@@ -90,7 +90,7 @@ package collections
 		public function contains(item:Object):Boolean
 		{
 			for each (var obj:Object in this) {
-				if (obj == item) {
+				if (obj === item) {
 					return true;
 				}
 				
@@ -223,6 +223,7 @@ package collections
 		}
 		
 		private var _iteratingItems:Array;
+		private var _len:int;
 		/**
 		 * @private
 		 */
@@ -230,8 +231,9 @@ package collections
 		{
 			if (index == 0) {
 				_iteratingItems = toArray();
+				_len = _iteratingItems.length;
 			}
-			return index < length ? index+1 : 0;
+			return index < _len ? index+1 : 0;
 		}
 		
 		/**
