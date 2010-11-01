@@ -11,7 +11,7 @@ package collections
 		private var _items:Array = [];
 		
 		/**
-		 * @copy com.mixbook.collection.Collection#Collection()
+		 * @copy collections.Collection#Collection()
 		 */
 		public function ArrayList(collection:ICollection = null)
 		{
@@ -40,6 +40,14 @@ package collections
 				throw new RangeError("Cannot insert element at index " + index);
 			}
 			_items.splice(index, 0, item);
+		}
+		
+		/**
+		 * @private
+		 */
+		override public function contains(item:Object):Boolean
+		{
+			return indexOf(item) != -1;
 		}
 		
 		/**

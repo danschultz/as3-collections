@@ -160,7 +160,7 @@ package collections
 		 * @param key The key to retrieve the value for.
 		 * @return The key's value.
 		 */
-		public function grab(key:Object):Object
+		public function grab(key:Object):*
 		{
 			var entry:Entry = findEntryForKey(key);
 			return entry != null ? entry.value : undefined;
@@ -191,10 +191,10 @@ package collections
 		 * @param value The value to map to.
 		 * @return The old value.
 		 */
-		public function put(key:Object, value:Object):Object
+		public function put(key:Object, value:Object):*
 		{
 			var entry:Entry = findEntryForKey(key);
-			var oldValue:Object
+			var oldValue:*;
 			
 			if (entry == null) {
 				entry = new Entry(key, value);
@@ -225,12 +225,12 @@ package collections
 		 * @param key The key to remove.
 		 * @return The value the key mapped to.
 		 */
-		public function remove(key:Object):Object
+		public function remove(key:Object):*
 		{
 			var hash:Object = computeHash(key);
 			var entry:Entry = _hashToEntries[hash];
 			var previousEntry:Entry;
-			var value:Object;
+			var value:*;
 			while (entry != null) {
 				if (areKeysEqual(key, entry.key)) {
 					value = entry.value;

@@ -11,7 +11,7 @@ package collections
 		private var _map:HashMap = new HashMap();
 		
 		/**
-		 * @copy com.mixbook.collection.Collection#Collection()
+		 * @copy collections.Collection#Collection()
 		 */
 		public function HashSet(collection:ICollection = null)
 		{
@@ -40,11 +40,8 @@ package collections
 		 */
 		override public function add(item:Object):Boolean
 		{
-			if (!contains(item)) {
-				_map.put(item, null);
-				return true;
-			}
-			return false;
+			_map.put(item, null);
+			return true;
 		}
 		
 		/**
@@ -60,11 +57,7 @@ package collections
 		 */
 		override public function remove(item:Object):Boolean
 		{
-			if (contains(item)) {
-				_map.remove(item);
-				return true;
-			}
-			return false;
+			return _map.remove(item) != undefined;
 		}
 		
 		/**

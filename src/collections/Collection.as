@@ -89,12 +89,14 @@ package collections
 		 */
 		public function contains(item:Object):Boolean
 		{
+			var hasEquals:Boolean = item != null && item.hasOwnProperty("equals");
+			
 			for each (var obj:Object in this) {
 				if (obj === item) {
 					return true;
 				}
 				
-				if (obj.hasOwnProperty("equals") && item.hasOwnProperty("equals")) {
+				if (hasEquals && obj != null && obj.hasOwnProperty("equals")) {
 					try {
 						if (obj.equals(item)) {
 							return true;
@@ -104,6 +106,7 @@ package collections
 					}
 				}
 			}
+			
 			return false;
 		}
 		
