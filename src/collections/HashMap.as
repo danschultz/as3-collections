@@ -36,7 +36,7 @@ package collections
 				return true;
 			}
 			
-			if (key1 != null && key1.hasOwnProperty("equals") && key2 != null && key2.hasOwnProperty("equals")) {
+			if (key1 != null && key2 != null && key1.hasOwnProperty("equals") && key2.hasOwnProperty("equals")) {
 				try {
 					if (key1.equals(key2)) {
 						return true;
@@ -193,23 +193,30 @@ package collections
 		 */
 		public function put(key:Object, value:Object):*
 		{
-			var entry:Entry = findEntryForKey(key);
 			var oldValue:*;
 			
+			var entry:Entry = findEntryForKey(key);
 			if (entry == null) {
 				entry = new Entry(key, value);
 				
 				var hash:Object = computeHash(key);
 				var entryForHash:Entry = _hashToEntries[hash];
 				
+				// there isn't an entry yet for the key's hash. assign the hash to the 
+				// first entry.
 				if (entryForHash == null) {
 					_hashToEntries[hash] = entry;
-				} else {
+				}
+				// there's already entries for the key's hash. assign the new entry to
+				// last entries 'next' property.
+				else {
 					while (entryForHash.next != null) {
 						entryForHash = entryForHash.next;
 					}
 					entryForHash.next = entry;
 				}
+				
+				_length++;
 			} else {
 				oldValue = entry.value;
 			}
@@ -228,9 +235,10 @@ package collections
 		public function remove(key:Object):*
 		{
 			var hash:Object = computeHash(key);
-			var entry:Entry = _hashToEntries[hash];
 			var previousEntry:Entry;
 			var value:*;
+			
+			var entry:Entry = _hashToEntries[hash];
 			while (entry != null) {
 				if (areKeysEqual(key, entry.key)) {
 					value = entry.value;
@@ -255,6 +263,8 @@ package collections
 				previousEntry = entry;
 				entry = entry.next;
 			}
+			
+			_length--;
 			return value;
 		}
 		
@@ -301,12 +311,13 @@ package collections
 			return length == 0;
 		}
 		
+		private var _length:int = 0;
 		/**
 		 * The number of key value pairs in this map.
 		 */
 		public function get length():int
 		{
-			return keys().length;
+			return _length;
 		}
 	}
 }

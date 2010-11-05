@@ -83,15 +83,15 @@ package collections
 			
 			var len:int = length;
 			for (var i:int = 0; i < len; i++) {
-				var item:Object = _items[i];
+				var tempItem:Object = _items[i];
 				
-				if (item === item) {
+				if (tempItem === item) {
 					return i;
 				}
 				
-				if (hasEquals && item != null && item.hasOwnProperty("equals")) {
+				if (hasEquals && tempItem != null && tempItem.hasOwnProperty("equals")) {
 					try {
-						if (item.equals(item)) {
+						if (tempItem.equals(item)) {
 							return i;
 						}
 					} catch(e:Error) {
