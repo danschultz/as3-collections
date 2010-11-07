@@ -11,14 +11,24 @@ package collections
 	 * <p>
 	 * This hash map supports the equality of keys where two keys might not be
 	 * the same object reference, but represent the same data. It is up to the object 
-	 * that you pass as a key to support this functionality. In order for an object 
-	 * to support this, the object must implement two methods: <code>equals()</code> 
-	 * and <code>hashCode()</code>.
-	 * </p>
+	 * that you pass as a key to support this functionality. This is supported by the
+	 * use of two methods that are implemented on the key object: <code>hashCode()</code>
+	 * and <code>equals()</code>. When a key is inserted, the key is checked for the
+	 * existance of each of these methods. If they exist, the result from 
+	 * <code>hashCode()</code> is used to map the key to a value. If two keys have
+	 * the same hash code, then they're compared using their <code>equals()</code>
+	 * method.
+	 * 
+	 * <p>
+	 * <strong>Note:</strong> Care should be taken when a mutable object is used
+	 * as a key in a map. This map implementation will not rehash an object if its
+	 * property changes in such a way that it modifies its <code>hashCode()</code>
+	 * value.
+	 * <p>
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class HashMap
+	public class HashMap implements IMap
 	{
 		private var _hashToEntries:Dictionary = new Dictionary();
 		
@@ -58,7 +68,7 @@ package collections
 		}
 		
 		/**
-		 * Clears all the keys and their values from the hash map.
+		 * @inheritDoc
 		 */
 		public function clear():void
 		{
@@ -82,10 +92,7 @@ package collections
 		}
 		
 		/**
-		 * Checks if the given key is mapped to a value in this hash map.
-		 * 
-		 * @param key The key to check for.
-		 * @return <code>true</code> if the key was found.
+		 * @inheritDoc
 		 */
 		public function containsKey(key:Object):Boolean
 		{
@@ -93,10 +100,7 @@ package collections
 		}
 		
 		/**
-		 * Checks if the given value is being mapped to by a key.
-		 * 
-		 * @param value The value to check for.
-		 * @return <code>true</code> if the value was found.
+		 * @inheritDoc
 		 */
 		public function containsValue(value:Object):Boolean
 		{
@@ -109,11 +113,7 @@ package collections
 		}
 		
 		/**
-		 * Checks if two maps are equal. Two maps are equal when their lengths are 
-		 * the same, and their keys map to the same values.
-		 * 
-		 * @param obj The other hash map.
-		 * @return <code>true</code> if the two maps are equal.
+		 * @inheritDoc
 		 */
 		public function equals(obj:HashMap):Boolean
 		{
@@ -121,25 +121,28 @@ package collections
 				return true;
 			}
 			
-			var keys1:Array = keys();
-			var keys2:Array = obj.keys();
-			
-			if (keys1.length == keys2.length) {
-				for (var key1:Object in keys1) {
-					if (grab(key1) !== obj.grab(key1)) {
+			if (length == obj.length) {
+				for (var key:Object in keys()) {
+					if (grab(key) !== obj.grab(key)) {
 						return false;
 					}
 				}
 				
-				for (var key2:Object in keys2) {
-					if (grab(key2) !== obj.grab(key2)) {
-						return false;
-					}
-				}
-				
-				return isEmpty;
+				return true;
 			}
 			return false;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function entries():Array
+		{
+			var result:Array = [];
+			for each (var entry:Entry in _hashToEntries) {
+				result.push( new Entry(entry.key, entry.value) );
+			}
+			return result;
 		}
 		
 		private function findEntryForKey(key:Object):Entry
@@ -155,10 +158,7 @@ package collections
 		}
 		
 		/**
-		 * Retrieves the value that is mapped to the given key.
-		 * 
-		 * @param key The key to retrieve the value for.
-		 * @return The key's value.
+		 * @inheritDoc
 		 */
 		public function grab(key:Object):*
 		{
@@ -167,9 +167,7 @@ package collections
 		}
 		
 		/**
-		 * Returns the set of keys contained in this map.
-		 * 
-		 * @return The set of keys.
+		 * @inheritDoc
 		 */
 		public function keys():Array
 		{
@@ -184,12 +182,7 @@ package collections
 		}
 		
 		/**
-		 * Maps the given key to the given value. If the key already maps to a value,
-		 * the value is replaced with the new value, and the old value is returned.
-		 * 
-		 * @param key The key to map.
-		 * @param value The value to map to.
-		 * @return The old value.
+		 * @inheritDoc
 		 */
 		public function put(key:Object, value:Object):*
 		{
@@ -226,11 +219,7 @@ package collections
 		}
 		
 		/**
-		 * Removes the mapping for the given key, and returns the value the key was mapped
-		 * to.
-		 * 
-		 * @param key The key to remove.
-		 * @return The value the key mapped to.
+		 * @inheritDoc
 		 */
 		public function remove(key:Object):*
 		{
@@ -287,9 +276,7 @@ package collections
 		}
 		
 		/**
-		 * Returns an array of all the values belonging to this map.
-		 * 
-		 * @return A list of values.
+		 * @inheritDoc
 		 */
 		public function values():Array
 		{
@@ -304,7 +291,7 @@ package collections
 		}
 		
 		/**
-		 * <code>true</code> if there are no entries in this map.
+		 * @inheritDoc
 		 */
 		public function get isEmpty():Boolean
 		{
@@ -313,7 +300,7 @@ package collections
 		
 		private var _length:int = 0;
 		/**
-		 * The number of key value pairs in this map.
+		 * @inheritDoc
 		 */
 		public function get length():int
 		{

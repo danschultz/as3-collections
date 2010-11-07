@@ -38,20 +38,31 @@ package collections
 	 * method must be overridden to support this.
 	 * </p>
 	 * 
+     * <listing version="3.0">
+	 * var list:ArrayList = new ArrayList();
+	 * list.add(1);
+	 * list.add(2);
+	 * list.add(3);
+	 * 
+	 * for each (var num:Number in list) {
+	 * 	trace("num: " + num);
+	 * }
+	 * </listing>
+	 * 
 	 * @author Dan Schultz
 	 */
 	public class Collection extends Proxy implements ICollection
 	{
 		/**
-		 * Constructor.
+		 * Creates a new collection that is populated with the given items. The collection
+		 * is populated by performaing a <code>for..each</code> operation on the the
+		 * <code>items</code>.
 		 * 
-		 * @param collection The collection of items to add to this collection.
+		 * @param items The items to populate this collection with.
 		 */
-		public function Collection(collection:ICollection = null)
+		public function Collection(items:Object = null)
 		{
-			if (collection != null) {
-				addAll(collection);
-			}
+			addItemsFrom(items);
 		}
 		
 		/**
@@ -72,6 +83,13 @@ package collections
 				affected = add(item) || affected;
 			}
 			return affected;
+		}
+		
+		private function addItemsFrom(items:Object):void
+		{
+			for each (var item:Object in items) {
+				add(item);
+			}
 		}
 		
 		/**

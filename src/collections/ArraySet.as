@@ -15,9 +15,9 @@ package collections
 		/**
 		 * @copy collections.Collection#Collection()
 		 */
-		public function ArraySet(collection:ICollection = null)
+		public function ArraySet(items:Object = null)
 		{
-			super(collection);
+			super(items);
 		}
 		
 		/**

@@ -13,9 +13,9 @@ package collections
 		/**
 		 * @copy collections.Collection#Collection()
 		 */
-		public function ArrayList(collection:ICollection = null)
+		public function ArrayList(items:Object = null)
 		{
-			super(collection);
+			super(items);
 		}
 		
 		/**

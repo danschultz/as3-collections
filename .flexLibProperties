@@ -4,6 +4,8 @@
     <classEntry path="tests.collections.HashMapTests"/>
     <classEntry path="collections.ArrayList"/>
     <classEntry path="collections.ArraySet"/>
+    <classEntry path="collections.IMap"/>
+    <classEntry path="collections.BindableMap"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

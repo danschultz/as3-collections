@@ -13,26 +13,9 @@ package collections
 		/**
 		 * @copy collections.Collection#Collection()
 		 */
-		public function HashSet(collection:ICollection = null)
+		public function HashSet(items:Object = null)
 		{
-			super(collection);
-		}
-		
-		/**
-		 * Creates a new hash set that contains the items in the given object. This
-		 * method performs a <code>for each</code> iteration on the given object to
-		 * populate the collection.
-		 * 
-		 * @param items The items to set.
-		 * @return A new hash set.
-		 */
-		public static function from(items:Object):HashSet
-		{
-			var set:HashSet = new HashSet();
-			for each (var item:Object in items) {
-				set.add(item);
-			}
-			return set;
+			super(items);
 		}
 		
 		/**
