@@ -62,7 +62,7 @@ package collections
 		 */
 		public function Collection(items:Object = null)
 		{
-			addItemsFrom(items);
+			addAll(items);
 		}
 		
 		/**
@@ -76,20 +76,13 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function addAll(items:ICollection):Boolean
+		final public function addAll(items:Object):Boolean
 		{
 			var affected:Boolean = false;
 			for each (var item:Object in items) {
 				affected = add(item) || affected;
 			}
 			return affected;
-		}
-		
-		private function addItemsFrom(items:Object):void
-		{
-			for each (var item:Object in items) {
-				add(item);
-			}
 		}
 		
 		/**
@@ -131,7 +124,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function containsAll(items:ICollection):Boolean
+		final public function containsAll(items:Object):Boolean
 		{
 			for each (var item:Object in items) {
 				if (!contains(item)) {
@@ -144,7 +137,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function difference(items:ICollection):void
+		final public function difference(items:Object):void
 		{
 			for each (var item:Object in this) {
 				if (items.contains(item)) {
@@ -179,7 +172,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function intersection(items:ICollection):void
+		final public function intersection(items:Object):void
 		{
 			for each (var item:Object in this) {
 				if (!items.contains(item)) {
@@ -199,7 +192,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function removeAll(items:ICollection):Boolean
+		final public function removeAll(items:Object):Boolean
 		{
 			var affected:Boolean = false;
 			for each (var item:Object in items) {

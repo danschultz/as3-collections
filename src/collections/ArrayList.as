@@ -19,6 +19,24 @@ package collections
 		}
 		
 		/**
+		 * Returns the element of this list that is stored at the given index.
+		 * If the index is less than 0 or is greater than or equal to the size of 
+		 * the list, a <code>RangeError</code> is thrown.
+		 * 
+		 * @param index The position of the item to return.
+		 * @return The item at the given position.
+		 * @throws RangeError If <code>index</code> is less than 0 or greater than
+		 * 	or equal to the size of the list.
+		 */
+		public function at(index:int):Object
+		{
+			if (index < 0 || index >= length) {
+				throw new RangeError("Index " + index + " is outside range of list.");
+			}
+			return _items[index];
+		}
+		
+		/**
 		 * @private
 		 */
 		override public function add(item:Object):Boolean
@@ -48,24 +66,6 @@ package collections
 		override public function contains(item:Object):Boolean
 		{
 			return indexOf(item) != -1;
-		}
-		
-		/**
-		 * Returns the element of this list that is stored at the given index.
-		 * If the index is less than 0 or is greater than or equal to the size of 
-		 * the list, a <code>RangeError</code> is thrown.
-		 * 
-		 * @param index The position of the item to return.
-		 * @return The item at the given position.
-		 * @throws RangeError If <code>index</code> is less than 0 or greater than
-		 * 	or equal to the size of the list.
-		 */
-		public function getItemAt(index:int):Object
-		{
-			if (index < 0 || index >= length) {
-				throw new RangeError("Index " + index + " is outside range of list.");
-			}
-			return _items[index];
 		}
 		
 		/**
@@ -101,6 +101,17 @@ package collections
 			}
 			
 			return -1;
+		}
+		
+		/**
+		 * Removes and returns the last element in the array. If the array is empty,
+		 * <code>undefined</code> is returned.
+		 * 
+		 * @return The last element in the array, or <code>undefined</code>.
+		 */
+		public function pop():*
+		{
+			return isEmpty ? undefined : removeAt(length-1);
 		}
 		
 		/**
@@ -148,11 +159,40 @@ package collections
 		}
 		
 		/**
+		 * Removes and returns the first element in the array. If the array is empty,
+		 * <code>undefined</code> is returned.
+		 * 
+		 * @return The first element in the array, or <code>undefined</code>.
+		 */
+		public function shift():*
+		{
+			return isEmpty ? undefined : removeAt(0);
+		}
+		
+		/**
 		 * @private
 		 */
 		override public function toArray():Array
 		{
 			return _items.concat();
+		}
+		
+		/**
+		 * The first element in the array. If the list is empty, <code>undefined</code>
+		 * is returned.
+		 */
+		public function get first():*
+		{
+			return isEmpty ?  undefined : at(0);
+		}
+		
+		/**
+		 * The last element in the array. If the list is empty, <code>undefined</code>
+		 * is returned.
+		 */
+		public function get last():*
+		{
+			return isEmpty ? undefined : at(length-1);
 		}
 		
 		/**
