@@ -45,7 +45,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function remove(item:Object):Boolean
 		{
@@ -57,7 +57,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function toArray():Array
 		{

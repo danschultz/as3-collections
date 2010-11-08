@@ -6,6 +6,7 @@
     <classEntry path="collections.ArraySet"/>
     <classEntry path="collections.IMap"/>
     <classEntry path="collections.BindableMap"/>
+    <classEntry path="collections.Set"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

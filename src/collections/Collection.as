@@ -38,7 +38,7 @@ package collections
 	 * method must be overridden to support this.
 	 * </p>
 	 * 
-     * <listing version="3.0">
+	 * <listing version="3.0">
 	 * var list:ArrayList = new ArrayList();
 	 * list.add(1);
 	 * list.add(2);
@@ -149,7 +149,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function equals(collection:ICollection):Boolean
+		public function equals(collection:ICollection):Boolean
 		{
 			if (this === collection) {
 				return true;

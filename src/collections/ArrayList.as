@@ -235,7 +235,7 @@ package collections
 		 */
 		public function unique():ArrayList
 		{
-			return new ArrayList(new ArraySet(this));
+			return new ArrayList(new ArraySet(this).toArray());
 		}
 		
 		/**

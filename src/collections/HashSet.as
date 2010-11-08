@@ -9,7 +9,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class HashSet extends Collection
+	public class HashSet extends Set
 	{
 		private var _map:HashMap = new HashMap();
 		
@@ -22,7 +22,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function add(item:Object):Boolean
 		{
@@ -31,7 +31,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function contains(item:Object):Boolean
 		{
@@ -39,7 +39,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function remove(item:Object):Boolean
 		{
@@ -47,7 +47,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function toArray():Array
 		{
@@ -55,7 +55,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function get length():int
 		{
