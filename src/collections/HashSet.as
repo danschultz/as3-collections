@@ -1,8 +1,11 @@
 package collections
 {
 	/**
-	 * A hash set is a collection that contains no duplicate items. This collection
-	 * may contain <code>null</code> values.
+	 * A hash set is a collection that contains no duplicate items, but makes no 
+	 * guarentee to the order of iteration of its elements. This collection may 
+	 * contain <code>null</code> values.
+	 * 
+	 * @see collections.ArraySet
 	 * 
 	 * @author Dan Schultz
 	 */

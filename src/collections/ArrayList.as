@@ -15,7 +15,29 @@ package collections
 		 */
 		public function ArrayList(items:Object = null)
 		{
+			if (items is Array) {
+				_items = items.concat();
+				items = null;
+			}
+			
 			super(items);
+		}
+		
+		private function areElementsEqual(item1:Object, item2:Object):Boolean
+		{
+			if (item1 === item2) {
+				return true;
+			}
+			
+			if (item1 != null && item2 != null && item1.hasOwnProperty("equals") && item2.hasOwnProperty("equals")) {
+				try {
+					item1.equals(item2);
+				} catch (e:Error) {
+					
+				}
+			}
+			
+			return false;
 		}
 		
 		/**
@@ -69,6 +91,22 @@ package collections
 		}
 		
 		/**
+		 * Returns the first <code>n</code> elements from this array list. If <code>n</code>
+		 * is greater than 1, the return type is an array of elements. Otherwise only the
+		 * element is returned, or <code>undefined</code> if the array is empty.
+		 * 
+		 * @param count The number of elements to return.
+		 * @return An element, an array of elements, or <code>undefined</code>.
+		 */
+		public function first(count:int = 1):*
+		{
+			if (!isEmpty) {
+				return count == 1 ? at(0) : _items.slice(0, count);
+			}
+			return undefined;
+		}
+		
+		/**
 		 * Searches for the first occurrence in this list of the given element. This
 		 * method check if the given element has an <code>equals()</code> method. If
 		 * so, it will attempt to use this method to see if two objects are equal.
@@ -79,28 +117,30 @@ package collections
 		 */
 		public function indexOf(item:Object):int
 		{
-			var hasEquals:Boolean = item != null && item.hasOwnProperty("equals");
-			
 			var len:int = length;
 			for (var i:int = 0; i < len; i++) {
-				var tempItem:Object = _items[i];
-				
-				if (tempItem === item) {
+				if (areElementsEqual(item, _items[i])) {
 					return i;
-				}
-				
-				if (hasEquals && tempItem != null && tempItem.hasOwnProperty("equals")) {
-					try {
-						if (tempItem.equals(item)) {
-							return i;
-						}
-					} catch(e:Error) {
-						
-					}
 				}
 			}
 			
 			return -1;
+		}
+		
+		/**
+		 * Returns the last <code>n</code> elements from this array list. If <code>n</code>
+		 * is greater than 1, the return type is an array of elements. Otherwise only the
+		 * element is returned, or <code>undefined</code> if the array is empty.
+		 * 
+		 * @param count The number of elements to return.
+		 * @return An element, an array of elements, or <code>undefined</code>.
+		 */
+		public function last(count:int = 1):*
+		{
+			if (!isEmpty) {
+				return count == 1 ? at(length-1) : _items.slice(length-count, length);
+			}
+			return undefined;
 		}
 		
 		/**
@@ -143,6 +183,17 @@ package collections
 		}
 		
 		/**
+		 * Returns a new array where the elements are in the reverse order as this
+		 * array.
+		 * 
+		 * @return A new array.
+		 */
+		public function reverse():ArrayList
+		{
+			return new ArrayList(toArray().reverse());
+		}
+		
+		/**
 		 * Replaces an element at the given position with the specified element.
 		 * 
 		 * @param item The replacee item.
@@ -178,21 +229,13 @@ package collections
 		}
 		
 		/**
-		 * The first element in the array. If the list is empty, <code>undefined</code>
-		 * is returned.
+		 * Returns a new array where any duplicates of this array are removed.
+		 * 
+		 * @return A new array.
 		 */
-		public function get first():*
+		public function unique():ArrayList
 		{
-			return isEmpty ?  undefined : at(0);
-		}
-		
-		/**
-		 * The last element in the array. If the list is empty, <code>undefined</code>
-		 * is returned.
-		 */
-		public function get last():*
-		{
-			return isEmpty ? undefined : at(length-1);
+			return new ArrayList(new ArraySet(this));
 		}
 		
 		/**

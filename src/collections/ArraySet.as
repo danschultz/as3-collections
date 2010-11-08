@@ -2,9 +2,19 @@ package collections
 {
 	/**
 	 * An array set is a collection that does not contain duplicate items, and
-	 * are stored in the same order in which they're added. This collection may 
+	 * guarentees the iteration order in which they're added. This collection may 
 	 * contain <code>null</code> values. If an element is inserted twice, the 
-	 * old element is removed and inserted at the end of the list.
+	 * old element is moved to the end of the list.
+	 * 
+	 * <p>
+	 * This set is backed by both a <code>HashSet</code> and an <code>ArrayList</code>.
+	 * There is a performance penalty when removing elements from this set, because
+	 * of the additional overhead required to iterate and find the element to remove
+	 * from the <code>ArrayList</code>. If iteration order is not required, a 
+	 * <code>HashSet</code> is recommended.
+	 * </p>
+	 * 
+	 * @see collections.HashSet
 	 * 
 	 * @author Dan Schultz
 	 */

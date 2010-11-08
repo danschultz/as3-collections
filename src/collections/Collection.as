@@ -213,6 +213,14 @@ package collections
 		}
 		
 		/**
+		 * @private
+		 */
+		public function toString():String
+		{
+			return toArray().toString();
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		final public function get isEmpty():Boolean
