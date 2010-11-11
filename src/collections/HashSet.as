@@ -1,7 +1,7 @@
 package collections
 {
 	/**
-	 * A hash set is a collection that contains no duplicate items, but makes no 
+	 * A hash set is a collection that contains no duplicate items, and makes no 
 	 * guarentee to the order of iteration of its elements. This collection may 
 	 * contain <code>null</code> values.
 	 * 
@@ -26,8 +26,7 @@ package collections
 		 */
 		override public function add(item:Object):Boolean
 		{
-			_map.put(item, null);
-			return true;
+			return _map.put(item, null) === undefined;
 		}
 		
 		/**
@@ -43,7 +42,7 @@ package collections
 		 */
 		override public function remove(item:Object):Boolean
 		{
-			return _map.remove(item) != undefined;
+			return _map.remove(item) !== undefined;
 		}
 		
 		/**

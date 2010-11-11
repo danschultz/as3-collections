@@ -38,6 +38,9 @@ package collections
 	 * method must be overridden to support this.
 	 * </p>
 	 * 
+	 * <p>
+	 * <strong>Example:</code> Iterating a collection.
+	 * 
 	 * <listing version="3.0">
 	 * var list:ArrayList = new ArrayList();
 	 * list.add(1);
@@ -83,6 +86,36 @@ package collections
 				affected = add(item) || affected;
 			}
 			return affected;
+		}
+		
+		/**
+		 * Checks if two collection elements are equal. Two elements are considered equal if:
+		 * 
+		 * <ol>
+		 * <li><code>item1 === item2</code>, or</li>
+		 * <li><code>item1</code> and <code>item2</code> have an <code>equals()</code> 
+		 * 	method and <code>item1.equals(item2)</code> equates to <code>true</code>.</li>
+		 * </ol>
+		 * 
+		 * @param item1 The first element.
+		 * @param item2 The second element.
+		 * @return <code>true</code> if <code>item1</code> equals <code>item2</code>.
+		 */
+		protected function areElementsEqual(item1:Object, item2:Object):Boolean
+		{
+			if (item1 === item2) {
+				return true;
+			}
+			
+			if (item1 != null && item2 != null && item1.hasOwnProperty("equals") && item2.hasOwnProperty("equals")) {
+				try {
+					item1.equals(item2);
+				} catch (e:Error) {
+					
+				}
+			}
+			
+			return false;
 		}
 		
 		/**
