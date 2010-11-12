@@ -39,7 +39,7 @@ package collections
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Example:</code> Iterating a collection.
+	 * <strong>Example:</strong> Iterating a collection.
 	 * 
 	 * <listing version="3.0">
 	 * var list:ArrayList = new ArrayList();
@@ -193,7 +193,7 @@ package collections
 				var items2:Array = collection.toArray();
 				var len:int = length;
 				for (var i:int = 0; i < len; i++) {
-					if (items1[i] !== items2[i]) {
+					if (areElementsEqual(items1[i], items2[i])) {
 						return false;
 					}
 				}

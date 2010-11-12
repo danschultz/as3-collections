@@ -71,7 +71,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function toArray():Array
 		{
@@ -79,7 +79,7 @@ package collections
 		}
 		
 		/**
-		 * @private
+		 * @inheritDoc
 		 */
 		override public function get length():int
 		{
