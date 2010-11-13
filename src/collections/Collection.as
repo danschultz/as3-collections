@@ -109,7 +109,9 @@ package collections
 			
 			if (item1 != null && item2 != null && item1.hasOwnProperty("equals") && item2.hasOwnProperty("equals")) {
 				try {
-					item1.equals(item2);
+					if (item1.equals(item2)) {
+						return true;
+					}
 				} catch (e:Error) {
 					
 				}
@@ -123,9 +125,7 @@ package collections
 		 */
 		final public function clear():void
 		{
-			for each (var item:Object in this) {
-				remove(item);
-			}
+			removeAll(this);
 		}
 		
 		/**
@@ -133,24 +133,11 @@ package collections
 		 */
 		public function contains(item:Object):Boolean
 		{
-			var hasEquals:Boolean = item != null && item.hasOwnProperty("equals");
-			
 			for each (var obj:Object in this) {
-				if (obj === item) {
+				if (areElementsEqual(item, obj)) {
 					return true;
 				}
-				
-				if (hasEquals && obj != null && obj.hasOwnProperty("equals")) {
-					try {
-						if (obj.equals(item)) {
-							return true;
-						}
-					} catch (e:Error) {
-						
-					}
-				}
 			}
-			
 			return false;
 		}
 		
@@ -170,13 +157,10 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function difference(items:Object):void
+		final public function difference(items:Object):ICollection
 		{
-			for each (var item:Object in this) {
-				if (items.contains(item)) {
-					remove(item);
-				}
-			}
+			removeAll(items);
+			return this;
 		}
 		
 		/**
@@ -205,13 +189,15 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function intersection(items:Object):void
+		final public function intersection(items:Object):ICollection
 		{
+			var temp:ArrayList = new ArrayList(items);
 			for each (var item:Object in this) {
-				if (!items.contains(item)) {
+				if (!temp.contains(item)) {
 					remove(item);
 				}
 			}
+			return this;
 		}
 		
 		/**

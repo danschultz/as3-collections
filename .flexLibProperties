@@ -8,6 +8,10 @@
     <classEntry path="collections.BindableMap"/>
     <classEntry path="collections.Set"/>
     <classEntry path="collections.List"/>
+    <classEntry path="tests.collections.CollectionTests"/>
+    <classEntry path="tests.collections.ArrayListTests"/>
+    <classEntry path="tests.collections.Element"/>
+    <classEntry path="tests.collections.ListTests"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

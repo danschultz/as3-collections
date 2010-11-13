@@ -58,8 +58,9 @@ package collections
 		 * iteration.
 		 * 
 		 * @param items The items to diff with.
+		 * @return This collection.
 		 */
-		function difference(items:Object):void;
+		function difference(items:Object):ICollection;
 		
 		/**
 		 * Checks two collections for equality. Two collections are equal when the 
@@ -72,13 +73,16 @@ package collections
 		function equals(collection:ICollection):Boolean;
 		
 		/**
-		 * Removes any items from this collection that do not belong to the given object.
-		 * This method accepts an <code>Array</code>, <code>Collection</code>, or any 
-		 * object that supports a <code>for each</code> iteration.
+		 * Keeps only the elements in this collection that are contained in the given
+		 * object. In other words, removes any items from this collection that do not 
+		 * belong to the given object. This method accepts an <code>Array</code>, 
+		 * <code>Collection</code>, or any object that supports a <code>for each</code> 
+		 * iteration.
 		 * 
 		 * @param items The items to intersect with.
+		 * @return This collection.
 		 */
-		function intersection(items:Object):void;
+		function intersection(items:Object):ICollection;
 		
 		/**
 		 * Removes the given item from this collection.

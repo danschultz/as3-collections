@@ -128,7 +128,7 @@ package collections
 				var items2:Array = collection.toArray();
 				var len:int = length;
 				for (var i:int = 0; i < len; i++) {
-					if (areElementsEqual(items1[i], items2[i])) {
+					if (!areElementsEqual(items1[i], items2[i])) {
 						return false;
 					}
 				}
@@ -186,20 +186,9 @@ package collections
 		final public function last(count:int = 1):*
 		{
 			if (!isEmpty) {
-				return count == 1 ? at(length-1) : range(length-count, length).toArray();
+				return count == 1 ? at(length-1) : range(length-count < 0 ? 0 : length-count, length).toArray();
 			}
 			return undefined;
-		}
-		
-		/**
-		 * Removes and returns the first element in the list. If the list is empty,
-		 * <code>undefined</code> is returned.
-		 * 
-		 * @return The first element in the list, or <code>undefined</code>.
-		 */
-		final public function shift():*
-		{
-			return isEmpty ? undefined : removeAt(0);
 		}
 		
 		/**
@@ -279,6 +268,17 @@ package collections
 			
 			addAt(item, index);
 			return oldItem;
+		}
+		
+		/**
+		 * Removes and returns the first element in the list. If the list is empty,
+		 * <code>undefined</code> is returned.
+		 * 
+		 * @return The first element in the list, or <code>undefined</code>.
+		 */
+		final public function shift():*
+		{
+			return isEmpty ? undefined : removeAt(0);
 		}
 		
 		/**

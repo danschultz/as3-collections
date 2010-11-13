@@ -115,15 +115,15 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function equals(obj:HashMap):Boolean
+		public function equals(map:HashMap):Boolean
 		{
-			if (this == obj) {
+			if (this == map) {
 				return true;
 			}
 			
-			if (length == obj.length) {
+			if (length == map.length) {
 				for (var key:Object in keys()) {
-					if (grab(key) !== obj.grab(key)) {
+					if (grab(key) !== map.grab(key)) {
 						return false;
 					}
 				}

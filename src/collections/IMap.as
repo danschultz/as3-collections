@@ -40,10 +40,10 @@ package collections
 		 * Checks if two maps are equal. Two maps are equal when their lengths are 
 		 * the same, and their keys map to the same values.
 		 * 
-		 * @param obj The other hash map.
+		 * @param map The other hash map.
 		 * @return <code>true</code> if the two maps are equal.
 		 */
-		function equals(obj:HashMap):Boolean;
+		function equals(map:HashMap):Boolean;
 		
 		/**
 		 * Retrieves the value that is mapped to the given key.

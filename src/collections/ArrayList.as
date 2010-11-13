@@ -64,7 +64,7 @@ package collections
 		 */
 		override public function removeAt(index:int):*
 		{
-			if (index < 0 || index >= index) {
+			if (index < 0 || index >= length) {
 				throw new RangeError("Cannot remove element at index " + index);
 			}
 			return _items.splice(index, 1)[0];
