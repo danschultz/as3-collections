@@ -123,9 +123,7 @@ package collections
 		 */
 		final public function clear():void
 		{
-			for each (var item:Object in this) {
-				remove(item);
-			}
+			removeAll(this);
 		}
 		
 		/**

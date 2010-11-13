@@ -51,11 +51,11 @@ package tests.collections
 		public function testContainsKey():void
 		{
 			_map.put(1, "a");
-			_map.put(new ItemA(1), "a");
+			_map.put(new Item(1), "a");
 			
 			assertThat(_map.containsKey(1), equalTo(true));
-			assertThat(_map.containsKey(new ItemA(1)), equalTo(true));
-			assertThat(_map.containsKey(new ItemA(2)), equalTo(false));
+			assertThat(_map.containsKey(new Item(1)), equalTo(true));
+			assertThat(_map.containsKey(new Item(2)), equalTo(false));
 		}
 		
 		[Test]
@@ -67,19 +67,71 @@ package tests.collections
 		}
 		
 		[Test]
+		public function testEquals():void
+		{
+			_map.put(1, "a");
+			_map.put(2, "b");
+			_map.put(3, "c");
+			
+			assertThat(_map.equals(_map.clone()), equalTo(true));
+		}
+		
+		[Test]
+		public function testDoesNotEqualsWhenDifferentLengths():void
+		{
+			_map.put(1, "a");
+			_map.put(2, "b");
+			_map.put(3, "c");
+			
+			var clone:HashMap = _map.clone();
+			clone.remove(1);
+			assertThat(_map.equals(clone), equalTo(false));
+		}
+		
+		[Test]
+		public function testDoesNotEqualsWhenDifferentKeysAndSameLength():void
+		{
+			_map.put(1, "a");
+			_map.put(2, "b");
+			_map.put(3, "c");
+			
+			var map:HashMap = new HashMap();
+			map.put(2, "b");
+			map.put(3, "c");
+			map.put(4, "d");
+			
+			assertThat(_map.equals(map), equalTo(false));
+		}
+		
+		[Test]
+		public function testDoesNotEqualsWhenDifferentValuesAndSameLength():void
+		{
+			_map.put(1, "a");
+			_map.put(2, "b");
+			_map.put(3, "c");
+			
+			var map:HashMap = new HashMap();
+			map.put(1, "c");
+			map.put(2, "b");
+			map.put(3, "a");
+			
+			assertThat(_map.equals(map), equalTo(false));
+		}
+		
+		[Test]
 		public function testGrab():void
 		{
 			_map.put(1, "a");
-			_map.put(new ItemA(1), "b");
+			_map.put(new Item(1), "b");
 			
 			assertThat(_map.grab(1), equalTo("a"));
-			assertThat(_map.grab(new ItemA(1)), equalTo("b"));
+			assertThat(_map.grab(new Item(1)), equalTo("b"));
 		}
 		
 		[Test]
 		public function testKeys():void
 		{
-			var keys:Array = [1, 2, new ItemA(1)];
+			var keys:Array = [1, 2, new Item(1)];
 			var values:Array = ["a", "b", "c"];
 			for (var i:int = 0; i < keys.length; i++) {
 				_map.put(keys[i], values[i]);
@@ -99,7 +151,7 @@ package tests.collections
 			assertThat(_map.put(1, "b"), equalTo("a"));
 			assertThat(_map.length, equalTo(1));
 			
-			assertThat(_map.put(new ItemA(1), "c"), nullValue());
+			assertThat(_map.put(new Item(1), "c"), nullValue());
 			assertThat(_map.length, equalTo(2));
 		}
 		
@@ -107,11 +159,11 @@ package tests.collections
 		public function testRemove():void
 		{
 			_map.put(1, "a");
-			_map.put(new ItemA(1), "b");
+			_map.put(new Item(1), "b");
 			_map.put(2, "c");
 			
 			assertThat(_map.remove(1), equalTo("a"));
-			assertThat(_map.remove(new ItemA(1)), equalTo("b"));
+			assertThat(_map.remove(new Item(1)), equalTo("b"));
 			assertThat(_map.remove(2), equalTo("c"));
 			assertThat(_map.length, equalTo(0));
 		}
@@ -120,7 +172,7 @@ package tests.collections
 		public function testValues():void
 		{
 			_map.put(1, "a");
-			_map.put(new ItemA(1), "b");
+			_map.put(new Item(1), "b");
 			_map.put(2, "c");
 			
 			var values:Array = _map.values();
@@ -131,18 +183,18 @@ package tests.collections
 	}
 }
 
-class ItemA
+class Item
 {
 	public var num:int;
 	
-	public function ItemA(num:int)
+	public function Item(num:int)
 	{
 		this.num = num;
 	}
 	
-	public function equals(itemA:ItemA):Boolean
+	public function equals(item:Item):Boolean
 	{
-		return num == itemA.num;
+		return num == item.num;
 	}
 	
 	public function hashCode():Object

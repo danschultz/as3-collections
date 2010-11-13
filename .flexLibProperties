@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="tests.collections.HashMapTests"/>
@@ -8,6 +8,8 @@
     <classEntry path="collections.BindableMap"/>
     <classEntry path="collections.Set"/>
     <classEntry path="collections.List"/>
+    <classEntry path="tests.collections.CollectionTests"/>
+    <classEntry path="tests.collections.ArrayListTests"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
