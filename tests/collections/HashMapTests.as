@@ -1,6 +1,5 @@
-package tests.collections
+package collections
 {
-	import collections.HashMap;
 	
 	import org.flexunit.assertThat;
 	import org.hamcrest.collection.hasItem;
@@ -196,7 +195,7 @@ package tests.collections
 					assertThat(_map.remove(elementToRemove), equalTo(elementToRemove.str));
 				}
 				
-				assertThat(_map.length, equalTo(0));
+				assertThat(_map.isEmpty, equalTo(true));
 			}
 		}
 		

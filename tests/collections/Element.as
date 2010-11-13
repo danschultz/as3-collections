@@ -1,4 +1,4 @@
-package tests.collections
+package collections
 {
 	public class Element
 	{

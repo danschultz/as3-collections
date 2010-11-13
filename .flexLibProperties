@@ -1,19 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="3">
   <includeClasses>
-    <classEntry path="tests.collections.HashMapTests"/>
     <classEntry path="collections.ArrayList"/>
     <classEntry path="collections.ArraySet"/>
+    <classEntry path="collections.Collection"/>
+    <classEntry path="collections.HashMap"/>
+    <classEntry path="collections.HashSet"/>
+    <classEntry path="collections.ICollection"/>
     <classEntry path="collections.IMap"/>
-    <classEntry path="collections.BindableMap"/>
-    <classEntry path="collections.Set"/>
     <classEntry path="collections.List"/>
-    <classEntry path="tests.collections.CollectionTests"/>
-    <classEntry path="tests.collections.ArrayListTests"/>
-    <classEntry path="tests.collections.Element"/>
-    <classEntry path="tests.collections.ListTests"/>
-    <classEntry path="tests.collections.CollectionTests"/>
-    <classEntry path="tests.collections.ArrayListTests"/>
+    <classEntry path="collections.Set"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

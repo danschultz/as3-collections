@@ -17,6 +17,7 @@ package collections
 		{
 			if (items is Array) {
 				_items = items.concat();
+				_length = _items.length;
 				items = null;
 			}
 			
@@ -42,6 +43,7 @@ package collections
 			if (index < 0 || index > length) {
 				throw new RangeError("Cannot insert element at index " + index);
 			}
+			_length++;
 			_items.splice(index, 0, item);
 		}
 		
@@ -67,6 +69,7 @@ package collections
 			if (index < 0 || index >= length) {
 				throw new RangeError("Cannot remove element at index " + index);
 			}
+			_length--;
 			return _items.splice(index, 1)[0];
 		}
 		
@@ -78,12 +81,13 @@ package collections
 			return _items.concat();
 		}
 		
+		private var _length:int = 0;
 		/**
 		 * @inheritDoc
 		 */
 		override public function get length():int
 		{
-			return _items.length;
+			return _length;
 		}
 	}
 }

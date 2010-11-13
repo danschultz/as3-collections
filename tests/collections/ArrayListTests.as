@@ -1,6 +1,5 @@
-package tests.collections
+package collections
 {
-	import collections.ArrayList;
 	
 	import org.flexunit.assertThat;
 	import org.hamcrest.collection.array;

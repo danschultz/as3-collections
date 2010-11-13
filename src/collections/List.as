@@ -39,7 +39,7 @@ package collections
 	 * </p>
 	 * 
 	 * <p>
-	 * <strong>Example:</strong> Using the array access operator.
+	 * <strong>Example:</strong> Using the array access operators.
 	 * 
 	 * <listing version="3.0">
 	 * var list:ArrayList = new ArrayList();
@@ -87,7 +87,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		override public function add(item:Object):Boolean
+		final override public function add(item:Object):Boolean
 		{
 			var oldLength:int = length;
 			addAt(item, length);
