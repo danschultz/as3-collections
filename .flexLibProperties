@@ -10,6 +10,8 @@
     <classEntry path="collections.IMap"/>
     <classEntry path="collections.List"/>
     <classEntry path="collections.Set"/>
+    <classEntry path="collections.HashSetTests"/>
+    <classEntry path="collections.ArraySetTests"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
