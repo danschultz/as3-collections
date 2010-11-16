@@ -1,9 +1,12 @@
 package collections
 {
+	import flash.utils.IDataInput;
+	import flash.utils.IDataOutput;
+	import flash.utils.IExternalizable;
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
 	import flash.utils.getQualifiedClassName;
-
+	
 	/**
 	 * Provides a base implementation for all collection classes.  This collection 
 	 * delegates the insertion, removal and retrieval of items to its sub-classes.
@@ -50,6 +53,39 @@ package collections
 	 * for each (var num:Number in list) {
 	 * 	trace("num: " + num);
 	 * }
+	 * </listing>
+	 * </p>
+	 * 
+	 * <p>
+	 * In addition to iteration, some sub-classes support writing and reading from an AMF stream 
+	 * (i.e. externalization). This can be accomplished through a <code>ByteArray</code> or through 
+	 * a Flash Remoting service. It is up to the sub-class to support this functionality. To support
+	 * this, sub-classes must implement <code>IExternalizable</code> and have the 
+	 * <code>[RemoteClass]</code> metadata. This class will handle the heavy lifting of serializing 
+	 * the collection and its elements.
+	 * </p>
+	 * 
+	 * <p>
+	 * The following collections support externalization:
+	 * 
+	 * <ul>
+	 * <li><code>ArrayList</code></li>
+	 * <li><code>ArraySet</code></li>
+	 * <li><code>HashSet</code></li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * <p>
+	 * <strong>Example:</strong> Writing a collection to a <code>ByteArray</code>:
+	 * 
+	 * <listing version="3.0">
+	 * var list:ArrayList = new ArrayList([1, 2, 3]);
+	 * var bytes:ByteArray = new ByteArray();
+	 * bytes.writeObject(list);
+	 * 
+	 * bytes.position = 0;
+	 * var copiedList:ArrayList = bytes.readObject();
+	 * trace(copiedList); // 1, 2, 3
 	 * </listing>
 	 * 
 	 * @author Dan Schultz
@@ -201,6 +237,14 @@ package collections
 		}
 		
 		/**
+		 * @copy flash.utils.IExternalizable#readExternal()
+		 */
+		public function readExternal(input:IDataInput):void
+		{
+			addAll(input.readObject());
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		public function remove(item:Object):Boolean
@@ -237,6 +281,14 @@ package collections
 		public function toString():String
 		{
 			return toArray().toString();
+		}
+		
+		/**
+		 * @copy flash.utils.IExternalizable#writeExternal()
+		 */
+		public function writeExternal(output:IDataOutput):void
+		{
+			output.writeObject(toArray());
 		}
 		
 		/**

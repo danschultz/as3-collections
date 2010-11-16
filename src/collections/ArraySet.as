@@ -1,5 +1,9 @@
 package collections
 {
+	import flash.utils.IExternalizable;
+	
+	[RemoteClass(alias="collections.ArraySet")]
+	
 	/**
 	 * An array set is a collection that does not contain duplicate items, and
 	 * guarentees the iteration order in which they're added. This collection may 
@@ -18,7 +22,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class ArraySet extends HashSet
+	public class ArraySet extends HashSet implements IExternalizable
 	{
 		private var _elements:ArrayList = new ArrayList();
 		

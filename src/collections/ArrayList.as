@@ -1,12 +1,16 @@
 package collections
 {
+	import flash.utils.IExternalizable;
+
+	[RemoteClass(alias="collections.ArrayList")]
+	
 	/**
 	 * A mutable list of elements that can contain duplicate elements. This 
 	 * collection supports <code>null</code> elements.
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class ArrayList extends List
+	public class ArrayList extends List implements IExternalizable
 	{
 		private var _items:Array = [];
 		

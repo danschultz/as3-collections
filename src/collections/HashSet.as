@@ -1,5 +1,9 @@
 package collections
 {
+	import flash.utils.IExternalizable;
+	
+	[RemoteClass(alias="collections.HashSet")]
+	
 	/**
 	 * A hash set is a collection that contains no duplicate items, and makes no 
 	 * guarentee to the order of iteration of its elements. This collection may 
@@ -9,7 +13,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class HashSet extends Set
+	public class HashSet extends Set implements IExternalizable
 	{
 		private var _map:HashMap = new HashMap();
 		

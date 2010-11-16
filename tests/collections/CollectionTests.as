@@ -1,5 +1,6 @@
 package collections
 {
+	import flash.utils.ByteArray;
 	
 	import org.flexunit.assertThat;
 	import org.hamcrest.collection.array;
@@ -130,53 +131,17 @@ package collections
 			assertThat(new CollectionsMock([1, 2, 3, 4, 5]).difference([]).toArray(), array(1, 2, 3, 4, 5));
 			assertThat(new CollectionsMock([1, 2, 3, 4, 5]).difference([1, 2, 3, 4, 5]).toArray(), emptyArray());
 		}
-	}
-}
-
-import collections.Collection;
-
-class CollectionsMock extends Collection
-{
-	private var _elements:Array = [];
-	
-	public function CollectionsMock(items:Array = null)
-	{
-		super(items);
-	}
-	
-	override public function add(item:Object):Boolean
-	{
-		_elements.push(item);
-		return true;
-	}
-	
-	private function indexOf(item:Object):int
-	{
-		for (var i:int = 0; i < _elements.length; i++) {
-			if (areElementsEqual(_elements[i], item)) {
-				return i;
-			}
+		
+		[Test]
+		public function testExternalization():void
+		{
+			_collection.addAll([1, 2, 3, 4, 5]);
+			
+			var bytes:ByteArray = new ByteArray();
+			bytes.writeObject(_collection);
+			bytes.position = 0;
+			
+			assertThat((bytes.readObject() as CollectionsMock).toArray(), array(1, 2, 3, 4, 5));
 		}
-		return -1;
-	}
-	
-	override public function remove(item:Object):Boolean
-	{
-		var index:int = indexOf(item);
-		if (index != -1) {
-			_elements.splice(index, 1);
-			return true;
-		}
-		return false;
-	}
-	
-	override public function toArray():Array
-	{
-		return _elements.concat();
-	}
-	
-	override public function get length():int
-	{
-		return _elements.length;
 	}
 }
