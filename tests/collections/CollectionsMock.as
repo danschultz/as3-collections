@@ -1,7 +1,9 @@
 package collections
 {
-	[RemoteClass(alias="collections.Collections")]
-	public class CollectionsMock extends Collection
+	import flash.utils.IExternalizable;
+
+	[RemoteClass(alias="collections.CollectionsMock")]
+	public class CollectionsMock extends Collection implements IExternalizable
 	{
 		private var _elements:Array = [];
 		

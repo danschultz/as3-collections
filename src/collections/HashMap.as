@@ -246,6 +246,7 @@ package collections
 						previousEntry.next = entry.next;
 					}
 					
+					_length--;
 					break;
 				}
 				
@@ -253,7 +254,6 @@ package collections
 				entry = entry.next;
 			}
 			
-			_length--;
 			return value;
 		}
 		

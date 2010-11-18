@@ -20,6 +20,7 @@ package collections
 			_set.addAll([1, 2, 3, 4, 5]);
 			_set.add(1);
 			assertThat(_set.toArray(), array(2, 3, 4, 5, 1));
+			assertThat(_set.length, equalTo(5));
 		}
 		
 		[Test]
@@ -31,6 +32,7 @@ package collections
 			assertThat(_set.remove(-1), equalTo(false));
 			assertThat(_set.remove(5), equalTo(true));
 			assertThat(_set.toArray(), array(1, 2, 4));
+			assertThat(_set.length, equalTo(3));
 		}
 	}
 }

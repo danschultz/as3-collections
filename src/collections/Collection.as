@@ -2,7 +2,6 @@ package collections
 {
 	import flash.utils.IDataInput;
 	import flash.utils.IDataOutput;
-	import flash.utils.IExternalizable;
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
 	import flash.utils.getQualifiedClassName;
@@ -94,8 +93,7 @@ package collections
 	{
 		/**
 		 * Creates a new collection that is populated with the given items. The collection
-		 * is populated by performaing a <code>for..each</code> operation on the the
-		 * <code>items</code>.
+		 * is populated by performaing a <code>for..each</code> operation on the <code>items</code>.
 		 * 
 		 * @param items The items to populate this collection with.
 		 */
