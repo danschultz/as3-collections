@@ -3,7 +3,9 @@ This framework provides a simple and tested library for representing groups of o
 in AS3 and Flex.
 
 ## Design Goals
-A major goal when implementing these collections was giving clients better control on
+
+### Equality
+A primary goal when implementing these collections was giving clients better control on
 object equality and hashing. In addition to an objects' identity (`===`), elements are 
 checked for the existance of an `equals()` method. If this method exists, it is used 
 for comparing the equality between two elements.
@@ -26,13 +28,24 @@ Take the case where you have a `Person` object. How are they equal?
 		}
 	}
 	
-	var personSet:HashSet = new HashSet([new Person(1)]); // a HashSet from as3-collections
-	var personCollection:ArrayCollection = new ArrayCollection([new Person(1)]); // a Flex collection
-	var personArray:Array = [new Person(1)]; // an AS3 array
+	// a HashSet from as3-collections
+	var personSet:HashSet = new HashSet([new Person(1)]);
 	
-	trace(personSet.contains(new Person(1)); // true
-	trace(personCollection.contains(new Person(1)); // false
-	trace(personArray.indexOf(new Person(1) != -1); // false
+	// a Flex collection
+	var personCollection:ArrayCollection = new ArrayCollection([new Person(1)]);
+	
+	// an AS3 array
+	var personArray:Array = [new Person(1)];
+	
+	trace(personSet.contains(new Person(1))); // true
+	trace(personCollection.contains(new Person(1))); // false
+	trace(personArray.indexOf(new Person(1)) != -1); // false
+	
+### Hashing
+Hashing
+
+### Sugar
+Syntax sugar
 
 ## Types of Collections
 As of now, this framework supports the more common types of collections. These include:
