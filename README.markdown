@@ -4,9 +4,9 @@ in AS3 and Flex.
 
 ## Design Goals
 A major goal when implementing these collections was giving clients better control on
-object equality and hashing. As opposed to object identity (`===`). When inserting elements
-into these collections, object's are checked for the existance of an `equals()` method.
-If this method exists, it is used for comparing two object's equality.
+object equality and hashing. In addition to an objects' identity (`===`), elements are 
+checked for the existance of an `equals()` method. If this method exists, it is used 
+for comparing the equality between two elements.
 
 **Example**
 Take the case where you have a `Person` object. How are they equal?
@@ -26,12 +26,13 @@ Take the case where you have a `Person` object. How are they equal?
 		}
 	}
 	
-	var people:ArrayList = new ArrayList();
-	people.add(new Person(1));
+	var personSet:HashSet = new HashSet([new Person(1)]); // a HashSet from as3-collections
+	var personCollection:ArrayCollection = new ArrayCollection([new Person(1)]); // a Flex collection
+	var personArray:Array = [new Person(1)]; // an AS3 array
 	
-	trace(people.contains(new Person(1)); // true
-	trace(people.contains(new Person(2)); // false
-	trace([new Person(1)].indexOf(new Person(1)); // -1
+	trace(personSet.contains(new Person(1)); // true
+	trace(personCollection.contains(new Person(1)); // false
+	trace(personArray.indexOf(new Person(1) != -1); // false
 
 ## Types of Collections
 As of now, this framework supports the more common types of collections. These include:
