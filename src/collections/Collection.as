@@ -135,7 +135,7 @@ package collections
 		 * @param item2 The second element.
 		 * @return <code>true</code> if <code>item1</code> equals <code>item2</code>.
 		 */
-		protected function areElementsEqual(item1:Object, item2:Object):Boolean
+		public static function areElementsEqual(item1:Object, item2:Object):Boolean
 		{
 			if (item1 === item2) {
 				return true;

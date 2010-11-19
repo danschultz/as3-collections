@@ -18,6 +18,8 @@
     <classEntry path="collections.HashSetTests"/>
     <classEntry path="collections.ListTests"/>
     <classEntry path="collections.CollectionsMock"/>
+    <classEntry path="collections.Map"/>
+    <classEntry path="collections.Entry"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

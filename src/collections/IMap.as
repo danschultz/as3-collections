@@ -43,7 +43,7 @@ package collections
 		 * @param map The other hash map.
 		 * @return <code>true</code> if the two maps are equal.
 		 */
-		function equals(map:HashMap):Boolean;
+		function equals(map:IMap):Boolean;
 		
 		/**
 		 * Retrieves the value that is mapped to the given key.

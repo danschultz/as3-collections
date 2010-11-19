@@ -28,7 +28,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class HashMap implements IMap
+	public class HashMap extends Map implements IMap
 	{
 		private var _hashToEntries:Dictionary = new Dictionary();
 		
@@ -40,41 +40,12 @@ package collections
 			super();
 		}
 		
-		private function areKeysEqual(key1:Object, key2:Object):Boolean
-		{
-			if (key1 === key2) {
-				return true;
-			}
-			
-			if (key1 != null && key2 != null && key1.hasOwnProperty("equals") && key2.hasOwnProperty("equals")) {
-				try {
-					if (key1.equals(key2)) {
-						return true;
-					}
-				} catch (e:Error) {
-					
-				}
-			}
-			
-			return false;
-		}
-		
 		private function computeHash(key:Object):Object
 		{
 			if (key != null && key.hasOwnProperty("equals") && key.hasOwnProperty("hashCode")) {
 				return key.hashCode();
 			}
 			return key;
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function clear():void
-		{
-			for each (var key:Object in keys()) {
-				remove(key);
-			}
 		}
 		
 		/**
@@ -94,49 +65,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function containsKey(key:Object):Boolean
-		{
-			return findEntryForKey(key) != null;
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function containsValue(value:Object):Boolean
-		{
-			for each (var v:Object in values()) {
-				if (v === value) {
-					return true;
-				}
-			}
-			return false;
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function equals(map:HashMap):Boolean
-		{
-			if (this == map) {
-				return true;
-			}
-			
-			if (length == map.length) {
-				for (var key:Object in keys()) {
-					if (grab(key) !== map.grab(key)) {
-						return false;
-					}
-				}
-				
-				return true;
-			}
-			return false;
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function entries():Array
+		override public function entries():Array
 		{
 			var result:Array = [];
 			for each (var entry:Entry in _hashToEntries) {
@@ -145,11 +74,14 @@ package collections
 			return result;
 		}
 		
-		private function findEntryForKey(key:Object):Entry
+		/**
+		 * @inheritDoc
+		 */
+		override protected function findEntryForKey(key:Object):Entry
 		{
-			var entry:Entry = _hashToEntries[computeHash(key)];
+			var entry:HashMapEntry = _hashToEntries[computeHash(key)];
 			while (entry != null) {
-				if (areKeysEqual(key, entry.key)) {
+				if (Collection.areElementsEqual(key, entry.key)) {
 					break;
 				}
 				entry = entry.next;
@@ -160,19 +92,10 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function grab(key:Object):*
-		{
-			var entry:Entry = findEntryForKey(key);
-			return entry != null ? entry.value : undefined;
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function keys():Array
+		override public function keys():Array
 		{
 			var result:Array = [];
-			for each (var entry:Entry in _hashToEntries) {
+			for each (var entry:HashMapEntry in _hashToEntries) {
 				while (entry != null) {
 					result.push(entry.key);
 					entry = entry.next;
@@ -184,16 +107,16 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function put(key:Object, value:Object):*
+		override protected function insertEntry(key:Object, value:Object):*
 		{
 			var oldValue:*;
 			
-			var entry:Entry = findEntryForKey(key);
+			var entry:HashMapEntry = findEntryForKey(key) as HashMapEntry;
 			if (entry == null) {
-				entry = new Entry(key, value);
+				entry = new HashMapEntry(key, value);
 				
 				var hash:Object = computeHash(key);
-				var entryForHash:Entry = _hashToEntries[hash];
+				var entryForHash:HashMapEntry = _hashToEntries[hash];
 				
 				// there isn't an entry yet for the key's hash. assign the hash to the 
 				// first entry.
@@ -208,8 +131,6 @@ package collections
 					}
 					entryForHash.next = entry;
 				}
-				
-				_length++;
 			} else {
 				oldValue = entry.value;
 			}
@@ -221,15 +142,15 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function remove(key:Object):*
+		override protected function removeEntryWithKey(key:Object):*
 		{
 			var hash:Object = computeHash(key);
-			var previousEntry:Entry;
+			var previousEntry:HashMapEntry;
 			var value:*;
 			
-			var entry:Entry = _hashToEntries[hash];
+			var entry:HashMapEntry = _hashToEntries[hash];
 			while (entry != null) {
-				if (areKeysEqual(key, entry.key)) {
+				if (Collection.areElementsEqual(key, entry.key)) {
 					value = entry.value;
 					
 					// this is the only entry for the hash, so just purge the hash.
@@ -246,7 +167,6 @@ package collections
 						previousEntry.next = entry.next;
 					}
 					
-					_length--;
 					break;
 				}
 				
@@ -258,30 +178,12 @@ package collections
 		}
 		
 		/**
-		 * @private
-		 */
-		public function toString():String
-		{
-			var str:String = "{";
-			var len:int = length;
-			var count:int = 0;
-			for each (var key:Object in keys()) {
-				if (count > 0) {
-					str += ", ";
-				}
-				str += key + " => " + grab(key);
-				count++;
-			}
-			return str + "}";
-		}
-		
-		/**
 		 * @inheritDoc
 		 */
-		public function values():Array
+		override public function values():Array
 		{
 			var values:Array = [];
-			for each (var entry:Entry in _hashToEntries) {
+			for each (var entry:HashMapEntry in _hashToEntries) {
 				while (entry != null) {
 					values.push(entry.value);
 					entry = entry.next;
@@ -289,36 +191,17 @@ package collections
 			}
 			return values;
 		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function get isEmpty():Boolean
-		{
-			return length == 0;
-		}
-		
-		private var _length:int = 0;
-		/**
-		 * @inheritDoc
-		 */
-		public function get length():int
-		{
-			return _length;
-		}
 	}
 }
 
-class Entry
+import collections.Entry;
+
+class HashMapEntry extends Entry
 {
-	public var key:Object;
-	public var value:Object;
+	public var next:HashMapEntry;
 	
-	public var next:Entry;
-	
-	public function Entry(key:Object, value:Object)
+	public function HashMapEntry(key:Object, value:Object)
 	{
-		this.key = key;
-		this.value = value;
+		super(key, value);
 	}
 }

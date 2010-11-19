@@ -211,11 +211,5 @@ package collections
 				assertThat(values, hasItem(value));
 			}
 		}
-		
-		[Test]
-		public function testCallProperty():void
-		{
-			_map[new Element(1)] = "a";
-		}
 	}
 }

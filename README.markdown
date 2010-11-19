@@ -12,7 +12,7 @@ for comparing the equality between two elements.
 
 **Example**
 Take the case where you have a `Person` object. How does equality in this library compare
-to equality in Flex?
+to equality in AS3/Flex?
 
 	class Person
 	{
@@ -47,7 +47,7 @@ are inserted into a map are checked for the existence of a `hashCode()` method. 
 exists, its result turns into the hash for the key-value pair. In conjunction with `equals()`,
 this functionality allows for colliding hashes.
 
-**Example** How do `HashMap`s compare to `Dictionary`s in AS3?
+**Example** How does a map compare to a `Dictionary`?
 
 	class Animal
 	{
@@ -100,7 +100,7 @@ this functionality allows for colliding hashes.
 ### Syntax Sugar
 I wanted to make working with these collections simple and familiar. There are touches of 
 syntax sugar sprinkled throughout the API.
-
+- - -
 #### Iteration
 All collections support `for each..in` loops. Also, copies of the collection are created during
 iteration. This allows for safe removal of an element within a loop.
@@ -111,23 +111,23 @@ iteration. This allows for safe removal of an element within a loop.
 		trace(num);
 	}
 
-**Example** Safe iteration removal.
+**Example** Safe removal of elements.
 	var set:ArraySet = new ArraySet([1, 2, 3, 4, 5]);
 	for each (var num:int in set) {
 		if (num == 2) {
 			list.remove(2);
 		}
 	}
-
+- - -
 #### Smart
 When possible, collections try to interpret the type of data you pass to it.
 
-**Example** `Array`'s are interpreted as `Collection`'s when working with the API.
+**Example** `Array`'s are interoperable with `Collection`'s when working with the API.
 	var list:ArrayList = new ArrayList();
 	list.addAll([1, 2, 3, 4, 5]);
 	list.containsAll([1, 2, 3, 4, 5]); // true;
-	trace(list.intersection([1, 2])); // 1, 2
-
+	trace(list.difference([1, 2])); // 3, 4, 5
+- - -
 #### Access Operators.
 All lists support bracket (`[]`) access of their elements.
 
@@ -136,7 +136,7 @@ All lists support bracket (`[]`) access of their elements.
 	list[0] = 5;
 	list[4] = 1;
 	trace(list[1]); // 2
-	
+- - -
 #### Externalization.
 All collections support reading and writing to a `ByteArray`. This sets up the framework
 for sending collections over the wire in AMF. Clients will need to map the collections 
@@ -154,7 +154,7 @@ on the server.
 ### Easy Sub-classing
 An important design constraint was making these collections easy to sub-class for other developers.
 As such, each collection type has a small and specific set of methods that must be implemented.
-All are well documented within the collection base classes (i.e. `Collection`, `Set`, `List`).
+All are well documented within the collection base classes (i.e. `Map`, `Collection`, `Set`, `List`).
 
 ## Types of Collections
 As of now, this framework supports the more common types of collections. These include:
