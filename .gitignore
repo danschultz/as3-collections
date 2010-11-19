@@ -1,2 +1,5 @@
-.*
-/.*
+.project
+.flexLibProperties
+.actionScriptProperties
+/.settings
+/.FlexUnitSettings
