@@ -20,7 +20,7 @@ package collections
 		/**
 		 * Adds all items in the given object to this collection.  This method accepts
 		 * an <code>Array</code>, <code>Collection</code>, or any object that supports
-		 * a <code>for each</code> iteration.
+		 * a <code>for each..in</code> iteration.
 		 * 
 		 * @param items The items to insert.
 		 * @return <code>true</code> if any item was inserted.
@@ -43,7 +43,7 @@ package collections
 		/**
 		 * Checks to see if this collection contains all the items in the given 
 		 * object. This method accepts an <code>Array</code>, <code>Collection</code>, 
-		 * or any object that supports a <code>for each</code> iteration.
+		 * or any object that supports a <code>for each..in</code> iteration.
 		 * 
 		 * @param items The object to check against.
 		 * @return <code>true</code> if this collection contains all items in the
@@ -54,7 +54,7 @@ package collections
 		/**
 		 * Removes any items from this collection that belong to this collection
 		 * and the given object. This method accepts an <code>Array</code>, 
-		 * <code>Collection</code>, or any object that supports a <code>for each</code> 
+		 * <code>Collection</code>, or any object that supports a <code>for each..in</code> 
 		 * iteration.
 		 * 
 		 * @param items The items to diff with.
@@ -76,7 +76,7 @@ package collections
 		 * Keeps only the elements in this collection that are contained in the given
 		 * object. In other words, removes any items from this collection that do not 
 		 * belong to the given object. This method accepts an <code>Array</code>, 
-		 * <code>Collection</code>, or any object that supports a <code>for each</code> 
+		 * <code>Collection</code>, or any object that supports a <code>for each..in</code> 
 		 * iteration.
 		 * 
 		 * @param items The items to intersect with.
@@ -95,7 +95,7 @@ package collections
 		/**
 		 * Removes all the items in the given collection from this collection. This method 
 		 * accepts an <code>Array</code>, <code>Collection</code>, or any object that supports
-		 * a <code>for each</code> iteration.
+		 * a <code>for each..in</code> iteration.
 		 * 
 		 * @param items The items to remove.
 		 * @return <code>true</code> if the collection was affected.

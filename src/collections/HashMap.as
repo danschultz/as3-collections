@@ -28,16 +28,16 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class HashMap extends Map implements IMap
+	public class HashMap extends Map
 	{
 		private var _hashToEntries:Dictionary = new Dictionary();
 		
 		/**
-		 * Constructor.
+		 * @copy collections.Map#Map()
 		 */
-		public function HashMap()
+		public function HashMap(map:Object = null)
 		{
-			super();
+			super(map);
 		}
 		
 		private function computeHash(key:Object):Object

@@ -2,8 +2,8 @@ package collections
 {
 	/**
 	 * A base map class that provides a scaffolding for more specific types of maps. 
-	 * This class delegates the insertion, retrieval, search and removal of its elements
-	 * to sub-classes. As such, the following methods must be overridden and implemented
+	 * This class delegates the insertion, retrieval and removal of its elements to 
+	 * sub-classes. As such, the following methods must be overridden and implemented
 	 * to provide a functional map:
 	 * 
 	 * <ul>
@@ -24,11 +24,14 @@ package collections
 	public class Map implements IMap
 	{
 		/**
-		 * Constructor.
+		 * Creates a new map that is populated with the given entries. The map is populated
+		 * by performing a <code>for each..in</code> operation on the <code>map</code>.
+		 * 
+		 * @param map The key-value mappings to populate this map with.
 		 */
-		public function Map()
+		public function Map(map:Object = null)
 		{
-			
+			putAll(map);
 		}
 		
 		/**
@@ -36,9 +39,7 @@ package collections
 		 */
 		final public function clear():void
 		{
-			for each (var key:Object in keys()) {
-				remove(key);
-			}
+			removeAll(keys());
 		}
 		
 		/**
@@ -166,6 +167,22 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
+		final public function putAll(map:Object):void
+		{
+			if (map is IMap) {
+				for each (var entry:Entry in map.entries()) {
+					put(entry.key, entry.value);
+				}
+			} else {
+				for (var key:Object in map) {
+					put(key, map[key]);
+				}
+			}
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
 		final public function remove(key:Object):*
 		{
 			var result:* = removeEntryWithKey(key);
@@ -173,6 +190,16 @@ package collections
 				_length--;
 			}
 			return result;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		final public function removeAll(keys:Object):void
+		{
+			for each (var key:Object in keys) {
+				remove(key);
+			}
 		}
 		
 		/**

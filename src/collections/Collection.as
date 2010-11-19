@@ -93,7 +93,7 @@ package collections
 	{
 		/**
 		 * Creates a new collection that is populated with the given items. The collection
-		 * is populated by performaing a <code>for..each</code> operation on the <code>items</code>.
+		 * is populated by performaing a <code>for each..in</code> operation on the <code>items</code>.
 		 * 
 		 * @param items The items to populate this collection with.
 		 */

@@ -71,6 +71,13 @@ package collections
 		function put(key:Object, value:Object):*;
 		
 		/**
+		 * Copies all the entries from the given map to this map. 
+		 * 
+		 * @param map The map to copy.
+		 */
+		function putAll(map:Object):void;
+		
+		/**
 		 * Removes the mapping for the given key, and returns the value the key was mapped
 		 * to.
 		 * 
@@ -78,6 +85,15 @@ package collections
 		 * @return The value the key mapped to.
 		 */
 		function remove(key:Object):*;
+		
+		/**
+		 * Removes all mappings for the given keys. This method accepts an <code>Array</code>, 
+		 * <code>Collection</code>, or any object that supports a <code>for each..in</code> 
+		 * iteration.
+		 * 
+		 * @param keys The keys to remove.
+		 */
+		function removeAll(keys:Object):void;
 		
 		/**
 		 * Returns an array of all the values belonging to this map.
