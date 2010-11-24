@@ -33,6 +33,13 @@ package collections
 		function clear():void;
 		
 		/**
+		 * Creates a shallow copy of this collection.
+		 * 
+		 * @return A new collection instance.
+		 */
+		function clone():ICollection
+		
+		/**
 		 * Checks to see if the given item is contained within this collection.
 		 * 
 		 * @param item The item to check.

@@ -4,6 +4,7 @@ package collections
 	import flash.utils.IDataOutput;
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
+	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
 	/**
@@ -160,6 +161,19 @@ package collections
 		final public function clear():void
 		{
 			removeAll(this);
+		}
+		
+		/**
+		 * Generates a shallow copy of this collection by creating a new instance of the
+		 * collection sub-class and passing in the array of its elements to the sub-classes
+		 * constructor.
+		 * 
+		 * @inheritDoc
+		 */
+		public function clone():ICollection
+		{
+			var clazz:Class = getDefinitionByName(getQualifiedClassName(this)) as Class;
+			return new clazz(toArray());
 		}
 		
 		/**
