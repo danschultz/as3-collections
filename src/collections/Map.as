@@ -7,16 +7,19 @@ package collections
 	 * to provide a functional map:
 	 * 
 	 * <ul>
+	 * <li>Map.containsKey()</li>
 	 * <li>Map.entries()</li>
-	 * <li>Map.insertEntry()</li>
-	 * <li>Map.removeEntryWithKey()</li>
+	 * <li>Map.grab()</li>
+	 * <li>Map.put()</li>
+	 * <li>Map.remove()</li>
+	 * <li>Map.length</li>
 	 * </ul>
 	 * 
 	 * <p>
-	 * <code>Map.findEntryForKey()</code> provides a default implementation for maps. Its
-	 * implementation iterates through each map entry and checks if the keys match. Since
-	 * this method is critical for retrieval of map elements, sub-classes should override
-	 * this method to provide faster retrieval of entries.
+	 * <code>Map.keys()</code> and <code>Map.values()</code> provides a default implementation 
+	 * for maps. Its implementation iterates through each map entry and returns either the 
+	 * set of keys, or list of values depending on the retrieval method. If a more efficient
+	 * way can be performed, it is recommended to override these methods.
 	 * </p>
 	 * 
 	 * @author Dan Schultz
@@ -45,9 +48,9 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function containsKey(key:Object):Boolean
+		public function containsKey(key:Object):Boolean
 		{
-			return findEntryForKey(key) != null;
+			return false;
 		}
 		
 		/**
@@ -93,50 +96,9 @@ package collections
 		}
 		
 		/**
-		 * Returns the entry in this map that contains the given key. If one is not found,
-		 * <code>null</code> is returned.
-		 * 
-		 * <p>
-		 * A default implementation is provided, where each <code>Entry</code> of the map
-		 * is iterated through to find a matching key. Sub-classes should override this 
-		 * method and provide a faster implementation if possible.
-		 * </p> 
-		 * 
-		 * @param key A key.
-		 * @return An entry, or <code>null</code> if one is not found.
-		 */
-		protected function findEntryForKey(key:Object):Entry
-		{
-			for each (var entry:Entry in entries()) {
-				if (Collection.areElementsEqual(key, entry.key)) {
-					return entry;
-				}
-			}
-			return null;
-		}
-		
-		/**
 		 * @inheritDoc
 		 */
-		final public function grab(key:Object):*
-		{
-			var entry:Entry = findEntryForKey(key);
-			return entry != null ? entry.value : undefined;
-		}
-		
-		/**
-		 * Called by <code>put()</code> to insert an key-value entry into this map.
-		 * If an entry already exists for the given key, the entry's value should be
-		 * replaced and the old value returned. If a new entry was created, 
-		 * <code>undefined</code> should be returned. Since some types of maps support
-		 * <code>null</code> values, it is important to return <code>undefined</code> as
-		 * apposed to <code>null</code>.
-		 * 
-		 * @param key The key for the entry.
-		 * @param value The value for the entry.
-		 * @return The replaced value, or <code>undefined</code> if the entry is new.
-		 */
-		protected function insertEntry(key:Object, value:Object):*
+		public function grab(key:Object):*
 		{
 			return undefined;
 		}
@@ -155,13 +117,9 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function put(key:Object, value:Object):*
+		public function put(key:Object, value:Object):*
 		{
-			var result:* = insertEntry(key, value);
-			if (result === undefined) {
-				_length++;
-			}
-			return result;
+			return undefined;
 		}
 		
 		/**
@@ -183,13 +141,9 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function remove(key:Object):*
+		public function remove(key:Object):*
 		{
-			var result:* = removeEntryWithKey(key);
-			if (result !== undefined) {
-				_length--;
-			}
-			return result;
+			return undefined;
 		}
 		
 		/**
@@ -202,21 +156,6 @@ package collections
 			}
 		}
 		
-		/**
-		 * Removes the entry from this map that contains the given <code>key</code>. If an
-		 * entry is not found, the value of <code>undefined</code> should be returned.
-		 * Otherwise, the removed value for the entry is returned. Since some maps support
-		 * <code>null</code> values, it is important to return <code>undefined</code> as
-		 * apposed to <code>null</code>.
-		 * 
-		 * @param key The key for the entry to remove.
-		 * @return The entries value, or <code>undefined</code> if the entry was not found.
-		 */
-		protected function removeEntryWithKey(key:Object):*
-		{
-			return undefined;
-		}
-				
 		/**
 		 * @private
 		 */
@@ -244,13 +183,12 @@ package collections
 			return length == 0;
 		}
 		
-		private var _length:int = 0;
 		/**
 		 * @inheritDoc
 		 */
-		final public function get length():int
+		public function get length():int
 		{
-			return _length;
+			return 0;
 		}
 	}
 }

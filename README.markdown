@@ -6,18 +6,32 @@ in AS3 and Flex.
 As of now, this framework supports the more common types of collections. These include:
 
 * Maps
-	* `HashMap` – Maps a key's hash to a value.
+	* `HashMap` - Maps a key's hash to a value.
+	* `ImmutableMap` - Wraps a map to make it unmodifiable.
 * Lists
-	* `ArrayList` – A mutable list of elements.
+	* `ArrayList` - A mutable list of elements.
+	* `ImmutableList` - Wraps a list to make it unmodifiable.
 * Sets
-	* `HashSet` – A collection that contain no duplicate elements, and doesn't preserve iteration order.
-	* `ArraySet` – Similar to HashSet, but preserves the order of iteration for its elements.
+	* `HashSet` - A collection that contain no duplicate elements, and doesn't preserve iteration order.
+	* `ArraySet` - Similar to HashSet, but preserves the order of iteration for its elements.
+	* `ImmutableSet` - Wraps a set to make it unmodifiable.
 
 More performance tuned collections may be introduced in the future. These could include 
 `TreeMap`s, `LinkedList`s, etc. However, the current set of collections, I feel, cover the vast 
 majority of use cases in Flex.
 
 Queues can be accomplished through `List` and its subclasses.
+
+### Immutable Collections
+Each generic type of collection has an unmodifiable class that can wrap it.
+
+**Example** Creating an immutable collection.
+	var map:HashMap = new HashMap({a:1, b:2, c:3, d:4, e:5});
+	var immutableMap:ImmutableMap = new ImmutableMap(map);
+
+This approach limits the number of classes required to provide immutability to the framework. In
+addition, these wrappers will work out of the box for custom collections that are created by other
+developers.
 
 ## Design Goals
 

@@ -49,6 +49,14 @@ package collections
 		}
 		
 		/**
+		 * @inheritDoc
+		 */
+		override public function containsKey(key:Object):Boolean
+		{
+			return findEntryForKey(key) != null;
+		}
+		
+		/**
 		 * Creates a shallow copy of this map.
 		 * 
 		 * @return A cloned map.
@@ -74,10 +82,7 @@ package collections
 			return result;
 		}
 		
-		/**
-		 * @inheritDoc
-		 */
-		override protected function findEntryForKey(key:Object):Entry
+		private function findEntryForKey(key:Object):Entry
 		{
 			var entry:HashMapEntry = _hashToEntries[computeHash(key)];
 			while (entry != null) {
@@ -87,6 +92,15 @@ package collections
 				entry = entry.next;
 			}
 			return entry;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override public function grab(key:Object):*
+		{
+			var entry:Entry = findEntryForKey(key);
+			return entry != null ? entry.value : undefined;
 		}
 		
 		/**
@@ -104,10 +118,7 @@ package collections
 			return result;
 		}
 		
-		/**
-		 * @inheritDoc
-		 */
-		override protected function insertEntry(key:Object, value:Object):*
+		private function insertEntry(key:Object, value:Object):*
 		{
 			var oldValue:*;
 			
@@ -142,7 +153,28 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		override protected function removeEntryWithKey(key:Object):*
+		override public function put(key:Object, value:Object):*
+		{
+			var result:* = insertEntry(key, value);
+			if (result === undefined) {
+				_length++;
+			}
+			return result;	
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override public function remove(key:Object):*
+		{
+			var result:* = removeEntryWithKey(key);
+			if (result !== undefined) {
+				_length--;
+			}
+			return result;
+		}
+		
+		private function removeEntryWithKey(key:Object):*
 		{
 			var hash:Object = computeHash(key);
 			var previousEntry:HashMapEntry;
@@ -190,6 +222,15 @@ package collections
 				}
 			}
 			return values;
+		}
+		
+		private var _length:int = 0;
+		/**
+		 * @inheritDoc
+		 */
+		override public function get length():int
+		{
+			return _length;
 		}
 	}
 }

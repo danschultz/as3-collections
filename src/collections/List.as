@@ -59,7 +59,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class List extends Collection
+	public class List extends Collection implements IList
 	{
 		/**
 		 * @copy collections.Collection#Collection()
@@ -214,7 +214,7 @@ package collections
 		 * 	the end of the list, where -1 is the last element.
 		 * @return A new list.
 		 */
-		public function range(start:int, end:int = int.MAX_VALUE):List
+		public function range(start:int, end:int = int.MAX_VALUE):IList
 		{
 			return new ArrayList(toArray().slice(start, end));
 		}
@@ -292,7 +292,7 @@ package collections
 		 * @param comparator The comparator function.
 		 * @return A new sorted list.
 		 */
-		public function sort(comparator:Function):List
+		public function sort(comparator:Function):IList
 		{
 			return new ArrayList(toArray().sort(comparator));
 		}

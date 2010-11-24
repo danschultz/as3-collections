@@ -7,7 +7,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class Set extends Collection
+	public class Set extends Collection implements ISet
 	{
 		/**
 		 * @copy collections.Collection#Collection()
