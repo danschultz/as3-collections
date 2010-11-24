@@ -26,12 +26,37 @@ Queues can be accomplished through `List` and its subclasses.
 Each generic type of collection has an unmodifiable class that can wrap it.
 
 **Example** Creating an immutable collection.
-	var map:HashMap = new HashMap({a:1, b:2, c:3, d:4, e:5});
-	var immutableMap:ImmutableMap = new ImmutableMap(map);
+	function createMap():IMap
+	{
+		var map:HashMap = new HashMap({a:1, b:2, c:3, d:4, e:5});
+		return new ImmutableMap(map);
+	}
 
 This approach limits the number of classes required to provide immutability to the framework. In
 addition, these wrappers will work out of the box for custom collections that are created by other
-developers.
+developers. This also allows clients to create and use a modifiable collection within a class. But,
+provide immutable access to these collections via accessor methods.
+
+**Example** Using immutable and mutable collections within a class.
+	class Post
+	{
+		private var _comments:ArraySet = new ArraySet();
+		
+		public function Post()
+		{
+			
+		}
+		
+		public function comment(text:String, commenter:User):void
+		{
+			_comments.add(new Comment(text, commenter));
+		}
+		
+		public function get comments():ISet
+		{
+			return new ImmutableSet(_comments);
+		}
+	}
 
 ## Design Goals
 
