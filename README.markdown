@@ -2,6 +2,23 @@
 This framework provides a simple and tested library for representing groups of objects 
 in AS3 and Flex.
 
+## Types of Collections
+As of now, this framework supports the more common types of collections. These include:
+
+* Maps
+	* `HashMap` – Maps a key's hash to a value.
+* Lists
+	* `ArrayList` – A mutable list of elements.
+* Sets
+	* `HashSet` – A collection that contain no duplicate elements, and doesn't preserve iteration order.
+	* `ArraySet` – Similar to HashSet, but preserves the order of iteration for its elements.
+
+More performance tuned collections may be introduced in the future. These could include 
+`TreeMap`s, `LinkedList`s, etc. However, the current set of collections, I feel, cover the vast 
+majority of use cases in Flex.
+
+Queues can be accomplished through `List` and its subclasses.
+
 ## Design Goals
 
 ### Equality
@@ -90,7 +107,7 @@ this functionality allows for colliding hashes.
 	var dictionary:Dictionary = new Dictionary();
 	dictionary[new Dog(1)] = "Baron";
 	dictionary[new Cat(1)] = "Jake";
-	trace(map[new Dog(1)]); // undefined
+	trace(dictionary[new Dog(1)]); // undefined
 	
 	// Dictionaries also can't support colliding hashes.
 	dictionary[new Dog(1).hashCode()] = "Baron";
@@ -163,20 +180,3 @@ on the server.
 An important design constraint was making these collections easy to sub-class for developers.
 As such, each collection type has a small and specific set of methods that must be implemented.
 All are well documented within the collection base classes (i.e. `Map`, `Collection`, `Set`, `List`).
-
-## Types of Collections
-As of now, this framework supports the more common types of collections. These include:
-
-* Maps
-	* `HashMap` – Maps a key's hash to a value.
-* Lists
-	* `ArrayList` – A mutable list of elements.
-* Sets
-	* `HashSet` – A collection that contain no duplicate elements, and doesn't preserve iteration order.
-	* `ArraySet` – Similar to HashSet, but preserves the order of iteration for its elements.
-
-More performance tuned collections may be introduced in the future. These could include 
-`TreeMap`s, `LinkedList`s, etc. However, the current set of collections, I feel, cover the vast 
-majority of use cases in Flex.
-
-Queues can be accomplished through `List` and its subclasses.
