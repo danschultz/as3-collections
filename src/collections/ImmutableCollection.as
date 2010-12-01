@@ -1,7 +1,5 @@
 package collections
 {
-	import flash.utils.IExternalizable;
-
 	/**
 	 * Provides a base implementation for immutable collection wrappers. This collection
 	 * delegates calls for immutable methods to the collection that it wraps. These methods
@@ -28,7 +26,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class ImmutableCollection extends Collection implements ICollection, IExternalizable
+	public class ImmutableCollection extends Collection implements ICollection
 	{
 		private var _collection:ICollection;
 		

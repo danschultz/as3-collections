@@ -26,11 +26,8 @@ Queues can be accomplished through `List` and its subclasses.
 Each generic type of collection has an unmodifiable class that can wrap it.
 
 **Example** Creating an immutable collection.
-	function createMap():IMap
-	{
-		var map:HashMap = new HashMap({a:1, b:2, c:3, d:4, e:5});
-		return new ImmutableMap(map);
-	}
+	var map:HashMap = new HashMap({a:1, b:2, c:3, d:4, e:5});
+	return new ImmutableMap(map);
 
 This approach limits the number of classes required to provide immutability to the framework. In
 addition, these wrappers will work out of the box for custom collections that are created by other
@@ -70,6 +67,18 @@ for comparing the equality between two elements.
 Take the case where you have a `Person` object. How does equality in this library compare
 to equality in AS3/Flex?
 
+	// a HashSet from as3-collections
+	var personSet:HashSet = new HashSet([new Person(1)]);
+	trace(personSet.contains(new Person(1))); // true
+	
+	// a Flex collection
+	var personCollection:ArrayCollection = new ArrayCollection([new Person(1)]);
+	trace(personCollection.contains(new Person(1))); // false
+	
+	// an AS3 array
+	var personArray:Array = [new Person(1)];
+	trace(personArray.indexOf(new Person(1)) != -1); // false
+	
 	class Person
 	{
 		public var id:int;
@@ -85,18 +94,6 @@ to equality in AS3/Flex?
 		}
 	}
 	
-	// a HashSet from as3-collections
-	var personSet:HashSet = new HashSet([new Person(1)]);
-	trace(personSet.contains(new Person(1))); // true
-	
-	// a Flex collection
-	var personCollection:ArrayCollection = new ArrayCollection([new Person(1)]);
-	trace(personCollection.contains(new Person(1))); // false
-	
-	// an AS3 array
-	var personArray:Array = [new Person(1)];
-	trace(personArray.indexOf(new Person(1)) != -1); // false
-	
 ### Hashing
 An equally important goal was to give clients more control with object hashing. Keys that 
 are inserted into a map are checked for the existence of a `hashCode()` method. If the method
@@ -105,6 +102,23 @@ this functionality allows for colliding hashes.
 
 **Example** How maps compare to `Dictionary`'s.
 
+	// Maps support colliding hashes and custom object equality.
+	var map:HashMap = new HashMap();
+	map.put(new Dog(1), "Baron");
+	map.put(new Cat(1), "Jake");
+	trace(map.grab(new Dog(1))); // Baron
+	
+	// Dictionaries only support object identity.
+	var dictionary:Dictionary = new Dictionary();
+	dictionary[new Dog(1)] = "Baron";
+	dictionary[new Cat(1)] = "Jake";
+	trace(dictionary[new Dog(1)]); // undefined
+	
+	// Dictionaries also can't support colliding hashes.
+	dictionary[new Dog(1).hashCode()] = "Baron";
+	dictionary[new Cat(1).hashCode()] = "Jake";
+	trace(dictionary[new Dog(1).hashCode()]); // Jake
+	
 	class Animal
 	{
 		public var id:int;
@@ -135,23 +149,6 @@ this functionality allows for colliding hashes.
 			return cat != null && id == cat.id;
 		}
 	}
-	
-	// Maps support colliding hashes and custom object equality.
-	var map:HashMap = new HashMap();
-	map.put(new Dog(1), "Baron");
-	map.put(new Cat(1), "Jake");
-	trace(map.grab(new Dog(1))); // Baron
-	
-	// Dictionaries only support object identity.
-	var dictionary:Dictionary = new Dictionary();
-	dictionary[new Dog(1)] = "Baron";
-	dictionary[new Cat(1)] = "Jake";
-	trace(dictionary[new Dog(1)]); // undefined
-	
-	// Dictionaries also can't support colliding hashes.
-	dictionary[new Dog(1).hashCode()] = "Baron";
-	dictionary[new Cat(1).hashCode()] = "Jake";
-	trace(dictionary[new Dog(1).hashCode()]); // Jake
 
 ### Syntax Sugar
 I wanted to make working with these collections simple and familiar. There are touches of 
