@@ -20,6 +20,16 @@ package collections
 		function at(index:int):*;
 		
 		/**
+		 * Adds all the elements in the given object to this list at the given index.
+		 * This method accepts an <code>Array</code>, <code>Collection</code>, or any 
+		 * object that supports a <code>for each..in</code> iteration.
+		 * 
+		 * @param items The items to add.
+		 * @param index The index to insert the items at.
+		 */
+		function addAllAt(items:Object, index:int):void;
+		
+		/**
 		 * Adds the given element to this list at the given index.
 		 * 
 		 * @param item The element to add.

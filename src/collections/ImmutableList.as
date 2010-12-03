@@ -29,6 +29,14 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
+		public function addAllAt(items:Object, index:int):void
+		{
+			
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
 		public function addAt(item:Object, index:int):void
 		{
 			

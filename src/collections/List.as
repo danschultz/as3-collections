@@ -95,6 +95,16 @@ package collections
 		}
 		
 		/**
+		 * @inheritDoc
+		 */
+		final public function addAllAt(items:Object, index:int):void
+		{
+			for each (var item:Object in items) {
+				addAt(item, index++);
+			}
+		}
+		
+		/**
 		 * Adds the given element to this list at the given index.
 		 * 
 		 * @param item The element to add.
