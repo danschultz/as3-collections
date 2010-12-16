@@ -1,6 +1,8 @@
 package collections
 {
 	import flash.utils.Dictionary;
+	
+	import mx.rpc.AbstractService;
 
 	/**
 	 * A hash map is a class that maps keys to values. This hash map supports 
