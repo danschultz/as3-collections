@@ -133,5 +133,18 @@ package collections
 		 * @return A new sorted list.
 		 */
 		function sort(comparator:Function):IList;
+		
+		/**
+		 * Returns a new list that contains that elements that return <code>true</code> by
+		 * the given block function. This function expects the following signature:
+		 * 
+		 * <p>
+		 * <code>function(e:Object):Boolean</code>
+		 * </p>
+		 * 
+		 * @param block The filter function.
+		 * @return A new list.
+		 */
+		function where(block:Function):IList;
 	}
 }

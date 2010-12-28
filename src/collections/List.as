@@ -308,6 +308,17 @@ package collections
 		}
 		
 		/**
+		 * @inheritDoc
+		 */
+		public function where(block:Function):IList
+		{
+			return new ArrayList(toArray().filter(function(element:Object, index:int, array:Array):Boolean
+			{
+				return block(element) == true;
+			}));
+		}
+		
+		/**
 		 * @private
 		 */
 		override public function toString():String

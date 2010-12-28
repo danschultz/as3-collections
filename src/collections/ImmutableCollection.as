@@ -28,8 +28,6 @@ package collections
 	 */
 	public class ImmutableCollection extends Collection implements ICollection
 	{
-		private var _collection:ICollection;
-		
 		/**
 		 * Creates a new immutable collection that wraps the given collection.
 		 * 
@@ -71,6 +69,15 @@ package collections
 		override public function toArray():Array
 		{
 			return _collection.toArray();
+		}
+		
+		private var _collection:ICollection;
+		/**
+		 * A reference to the wrapped collection.
+		 */
+		protected function get collection():ICollection
+		{
+			return _collection;
 		}
 		
 		/**

@@ -113,5 +113,13 @@ package collections
 		{
 			return this;
 		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function where(block:Function):IList
+		{
+			return this;
+		}
 	}
 }

@@ -32,5 +32,16 @@ package collections
 			
 			return false
 		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function where(block:Function):ISet
+		{
+			return new HashSet(toArray().filter(function(element:Object, index:int, array:Array):Boolean
+			{
+				return block(element) == true;
+			}));
+		}
 	}
 }

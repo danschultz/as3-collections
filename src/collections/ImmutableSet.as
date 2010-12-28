@@ -14,5 +14,13 @@ package collections
 		{
 			super(set);
 		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function where(block:Function):ISet
+		{
+			return this;
+		}
 	}
 }
