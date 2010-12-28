@@ -42,10 +42,14 @@ package collections
 			super(map);
 		}
 		
+		private static const RESERVED_KEYWORDS:Object = {};
 		private function computeHash(key:Object):Object
 		{
 			if (key != null && key.hasOwnProperty("equals") && key.hasOwnProperty("hashCode")) {
 				return key.hashCode();
+			}
+			if (key is String && RESERVED_KEYWORDS[key] is Function) {
+				key = "__" + key;
 			}
 			return key;
 		}

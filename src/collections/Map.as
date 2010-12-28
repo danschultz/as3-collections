@@ -125,7 +125,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function putAll(map:Object):void
+		final public function putAll(map:Object):IMap
 		{
 			if (map is IMap) {
 				for each (var entry:Entry in map.entries()) {
@@ -136,6 +136,7 @@ package collections
 					put(key, map[key]);
 				}
 			}
+			return this;
 		}
 		
 		/**
@@ -149,11 +150,12 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function removeAll(keys:Object):void
+		final public function removeAll(keys:Object):IMap
 		{
 			for each (var key:Object in keys) {
 				remove(key);
 			}
+			return this;
 		}
 		
 		/**

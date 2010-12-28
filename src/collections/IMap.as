@@ -74,8 +74,9 @@ package collections
 		 * Copies all the entries from the given map to this map. 
 		 * 
 		 * @param map The map to copy.
+		 * @return This instance.
 		 */
-		function putAll(map:Object):void;
+		function putAll(map:Object):IMap;
 		
 		/**
 		 * Removes the mapping for the given key, and returns the value the key was mapped
@@ -92,8 +93,9 @@ package collections
 		 * iteration.
 		 * 
 		 * @param keys The keys to remove.
+		 * @return This instance.
 		 */
-		function removeAll(keys:Object):void;
+		function removeAll(keys:Object):IMap;
 		
 		/**
 		 * Returns an array of all the values belonging to this map.

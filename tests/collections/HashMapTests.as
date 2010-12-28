@@ -211,5 +211,20 @@ package collections
 				assertThat(values, hasItem(value));
 			}
 		}
+		
+		[Test]
+		public function testKeyIsReservedKeywordOnObject():void
+		{
+			var tests:Array = ["hasOwnProperty", "isPrototypeOf", "propertyIsEnumerable", "setPropertyIsEnumerable", "toLocaleString", "toString", "valueOf"];
+			for each (var test:String in tests) {
+				var error:Error;
+				try {
+					new HashMap().put(test, 1);
+				} catch (e:Error) {
+					error = e;
+				}
+				assertThat("test failed for keyword '" + test + "'", error, nullValue());
+			}
+		}
 	}
 }
