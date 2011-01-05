@@ -42,7 +42,7 @@ package collections
 			super(map);
 		}
 		
-		private static const RESERVED_KEYWORDS:Object = {};
+		private static const RESERVED_KEYWORDS:Dictionary = new Dictionary();
 		private function computeHash(key:Object):Object
 		{
 			if (key != null && key.hasOwnProperty("equals") && key.hasOwnProperty("hashCode")) {
