@@ -1,5 +1,8 @@
 package collections
 {
+	import flash.utils.Proxy;
+	import flash.utils.flash_proxy;
+
 	/**
 	 * A base map class that provides a scaffolding for more specific types of maps. 
 	 * This class delegates the insertion, retrieval and removal of its elements to 
@@ -24,7 +27,7 @@ package collections
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class Map implements IMap
+	public class Map extends Proxy implements IMap
 	{
 		/**
 		 * Creates a new map that is populated with the given entries. The map is populated
@@ -191,6 +194,30 @@ package collections
 		public function get length():int
 		{
 			return 0;
+		}
+		
+		/**
+		 *  @private
+		 */
+		override flash_proxy function nextName(index:int):String
+		{
+			return undefined;
+		}
+		
+		/**
+		 * @private
+		 */
+		override flash_proxy function nextNameIndex(index:int):int
+		{
+			return -1;
+		}
+		
+		/**
+		 * @private
+		 */
+		override flash_proxy function nextValue(index:int):*
+		{
+			return undefined;
 		}
 	}
 }
