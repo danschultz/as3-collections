@@ -320,7 +320,7 @@ package collections
 		}
 		
 		/**
-		 *  @private
+		 * @private
 		 */
 		override flash_proxy function nextName(index:int):String
 		{
