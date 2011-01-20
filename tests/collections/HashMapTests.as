@@ -36,8 +36,8 @@ package collections
 			
 			var clonedMap:HashMap = _map.clone();
 			assertThat(clonedMap.length, equalTo(_map.length));
-			for (var key:Object in _map.keys()) {
-				assertThat("cloned map does not contain value for key", _map.containsKey(key), equalTo(true));
+			for each (var key:Object in _map.keys()) {
+				assertThat("cloned map does not contain value for key " + key, clonedMap.containsKey(key), equalTo(true));
 			}
 		}
 		

@@ -2,7 +2,9 @@ package collections
 {
 	import org.flexunit.assertThat;
 	import org.hamcrest.collection.array;
+	import org.hamcrest.collection.hasItems;
 	import org.hamcrest.object.equalTo;
+	import org.hamcrest.object.nullValue;
 
 	public class HashSetTests
 	{
@@ -40,7 +42,7 @@ package collections
 			assertThat(_set.add(null), equalTo(true));
 			
 			assertThat(_set.length, equalTo(2));
-			assertThat(_set.toArray(), array(1, null));
+			assertThat(_set.toArray(), hasItems(equalTo(1), nullValue()));
 		}
 		
 		[Test]
@@ -73,7 +75,7 @@ package collections
 			assertThat(_set.remove(new Element(1)), equalTo(false));
 			assertThat(_set.remove(3), equalTo(true));
 			assertThat(_set.remove(5), equalTo(true));
-			assertThat(_set.toArray(), array(2, 4));
+			assertThat(_set.toArray(), hasItems(equalTo(2), equalTo(4)));
 		}
 	}
 }

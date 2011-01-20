@@ -1,7 +1,6 @@
 package collections
 {
 	import flash.utils.Proxy;
-	import flash.utils.flash_proxy;
 
 	/**
 	 * A base map class that provides a scaffolding for more specific types of maps. 
@@ -194,30 +193,6 @@ package collections
 		public function get length():int
 		{
 			return 0;
-		}
-		
-		/**
-		 *  @private
-		 */
-		override flash_proxy function nextName(index:int):String
-		{
-			return undefined;
-		}
-		
-		/**
-		 * @private
-		 */
-		override flash_proxy function nextNameIndex(index:int):int
-		{
-			return -1;
-		}
-		
-		/**
-		 * @private
-		 */
-		override flash_proxy function nextValue(index:int):*
-		{
-			return undefined;
 		}
 	}
 }
