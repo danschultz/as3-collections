@@ -23,7 +23,7 @@
 
 	<groupId>com.github.danschultz</groupId>
 	<artifactId>as3-collections</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 
 	<packaging>swc</packaging>
 
