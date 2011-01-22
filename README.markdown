@@ -1,6 +1,8 @@
-# Collections Library for ActionScript 3 - Version 1.1
+# Welcome to AS3-Collections - Version 1.2.0
 This framework provides a simple and tested library for representing groups of objects 
 in AS3 and Flex. It is licensed under MIT.
+
+AS3-Collections follows the guidelines of [semantic versioning](http://www.semver.org).
 
 ## Types of Collections
 As of now, this framework supports the more common types of collections. These include:
