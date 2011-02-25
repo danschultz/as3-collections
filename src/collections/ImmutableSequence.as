@@ -1,22 +1,21 @@
 package collections
 {
-	[Deprecated(replacement="collections.ImmutableSequence", since="1.3.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
 	/**
-	 * An immutable collection that wraps a list.
+	 * An immutable collection that wraps a sequence.
 	 * 
 	 * @author Dan Schultz
 	 */
-	public class ImmutableList extends ImmutableCollection implements IList
+	public class ImmutableSequence extends ImmutableCollection implements ISequence
 	{
-		private var _list:IList
+		private var _sequence:ISequence;
 		
 		/**
 		 * @copy collections.ImmutableCollection#ImmutableCollection()
 		 */
-		public function ImmutableList(list:IList)
+		public function ImmutableSequence(sequence:ISequence)
 		{
-			super(list);
-			_list = list;
+			super(sequence);
+			_sequence = sequence;
 		}
 		
 		/**
@@ -24,7 +23,7 @@ package collections
 		 */
 		public function at(index:int):*
 		{
-			return _list.at(index);
+			return _sequence.at(index);
 		}
 		
 		/**
@@ -48,7 +47,7 @@ package collections
 		 */
 		public function first(count:int = 1):*
 		{
-			return _list.first(count);
+			return _sequence.first(count);
 		}
 		
 		/**
@@ -56,7 +55,7 @@ package collections
 		 */
 		public function indexOf(item:Object):int
 		{
-			return _list.indexOf(item);
+			return _sequence.indexOf(item);
 		}
 		
 		/**
@@ -64,7 +63,7 @@ package collections
 		 */
 		public function last(count:int = 1):*
 		{
-			return _list.last(count);
+			return _sequence.last(count);
 		}
 		
 		/**
@@ -78,9 +77,9 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function range(start:int, end:int = int.MAX_VALUE):IList
+		public function slice(start:int, end:int = int.MAX_VALUE):ISequence
 		{
-			return new ImmutableList(_list.range(start, end));
+			return new ImmutableSequence(_sequence.slice(start, end));
 		}
 		
 		/**
@@ -110,7 +109,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function sort(comparator:Function):IList
+		public function sort(comparator:Function):ISequence
 		{
 			return this;
 		}
@@ -118,7 +117,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		public function where(block:Function):IList
+		public function where(block:Function):ISequence
 		{
 			return this;
 		}

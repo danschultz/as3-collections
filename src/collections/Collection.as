@@ -114,7 +114,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function addAll(items:Object):Boolean
+		public function addAll(items:Object):Boolean
 		{
 			var affected:Boolean = false;
 			for each (var item:Object in items) {
@@ -143,12 +143,8 @@ package collections
 			}
 			
 			if (item1 != null && item2 != null && item1.hasOwnProperty("equals") && item2.hasOwnProperty("equals")) {
-				try {
-					if (item1.equals(item2)) {
-						return true;
-					}
-				} catch (e:Error) {
-					
+				if (item1.equals(item2)) {
+					return true;
 				}
 			}
 			
@@ -158,7 +154,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function clear():void
+		public function clear():void
 		{
 			removeAll(this);
 		}
@@ -192,7 +188,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function containsAll(items:Object):Boolean
+		public function containsAll(items:Object):Boolean
 		{
 			for each (var item:Object in items) {
 				if (!contains(item)) {
@@ -205,7 +201,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function difference(items:Object):ICollection
+		public function difference(items:Object):ICollection
 		{
 			removeAll(items);
 			return this;
@@ -237,7 +233,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function intersection(items:Object):ICollection
+		public function intersection(items:Object):ICollection
 		{
 			var temp:ArrayList = new ArrayList(items);
 			for each (var item:Object in this) {
@@ -267,7 +263,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function removeAll(items:Object):Boolean
+		public function removeAll(items:Object):Boolean
 		{
 			var affected:Boolean = false;
 			for each (var item:Object in items) {
@@ -306,7 +302,7 @@ package collections
 		/**
 		 * @inheritDoc
 		 */
-		final public function get isEmpty():Boolean
+		public function get isEmpty():Boolean
 		{
 			return length == 0;
 		}

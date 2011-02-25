@@ -1,8 +1,6 @@
 package collections
 {
 	import flash.utils.Dictionary;
-	
-	import mx.rpc.AbstractService;
 
 	/**
 	 * A hash map is a class that maps keys to values. This hash map supports 
@@ -33,6 +31,7 @@ package collections
 	public class HashMap extends Map
 	{
 		private var _hashToEntries:Dictionary = new Dictionary();
+		private var _keys:ArraySequence = new ArraySequence();
 		
 		/**
 		 * @copy collections.Map#Map()
@@ -46,7 +45,7 @@ package collections
 		private function computeHash(key:Object):Object
 		{
 			if (key != null && key.hasOwnProperty("equals") && key.hasOwnProperty("hashCode")) {
-				return key.hashCode();
+				key = key.hashCode();
 			}
 			if (key is String && RESERVED_KEYWORDS[key] is Function) {
 				key = "__" + key;
@@ -82,8 +81,8 @@ package collections
 		override public function entries():Array
 		{
 			var result:Array = [];
-			for each (var entry:Entry in _hashToEntries) {
-				result.push( new Entry(entry.key, entry.value) );
+			for each (var key:Object in keys()) {
+				result.push(findEntryForKey(key));
 			}
 			return result;
 		}
@@ -114,14 +113,7 @@ package collections
 		 */
 		override public function keys():Array
 		{
-			var result:Array = [];
-			for each (var entry:HashMapEntry in _hashToEntries) {
-				while (entry != null) {
-					result.push(entry.key);
-					entry = entry.next;
-				}
-			}
-			return result;
+			return _keys.toArray();
 		}
 		
 		private function insertEntry(key:Object, value:Object):*
@@ -148,6 +140,7 @@ package collections
 					}
 					entryForHash.next = entry;
 				}
+				_keys.add(key);
 			} else {
 				oldValue = entry.value;
 			}
@@ -205,6 +198,7 @@ package collections
 						previousEntry.next = entry.next;
 					}
 					
+					_keys.remove(key);
 					break;
 				}
 				
@@ -221,11 +215,8 @@ package collections
 		override public function values():Array
 		{
 			var values:Array = [];
-			for each (var entry:HashMapEntry in _hashToEntries) {
-				while (entry != null) {
-					values.push(entry.value);
-					entry = entry.next;
-				}
+			for each (var key:Object in keys()) {
+				values.push(grab(key));
 			}
 			return values;
 		}

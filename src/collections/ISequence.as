@@ -1,27 +1,14 @@
 package collections
 {
-	[Deprecated(replacement="collections.ISequence", since="1.3.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
 	/**
 	 * An interface that defines an orderered collection of elements.
 	 * 
 	 * @author Dan Schultz
 	 */
-	public interface IList extends ICollection
+	public interface ISequence extends ICollection
 	{
 		/**
-		 * Returns the element of this list that is stored at the given index.
-		 * If the index is less than 0 or is greater than or equal to the size of 
-		 * the list, a <code>RangeError</code> is thrown.
-		 * 
-		 * @param index The position of the item to return.
-		 * @return The item at the given position.
-		 * @throws RangeError If <code>index</code> is less than 0 or greater than
-		 * 	or equal to the size of the list.
-		 */
-		function at(index:int):*;
-		
-		/**
-		 * Adds all the elements in the given object to this list at the given index.
+		 * Adds all the elements in the given object to this sequence at the given index.
 		 * This method accepts an <code>Array</code>, <code>Collection</code>, or any 
 		 * object that supports a <code>for each..in</code> iteration.
 		 * 
@@ -31,7 +18,7 @@ package collections
 		function addAllAt(items:Object, index:int):void;
 		
 		/**
-		 * Adds the given element to this list at the given index.
+		 * Adds the given element to this sequence at the given index.
 		 * 
 		 * @param item The element to add.
 		 * @param index The index to add the element at.
@@ -40,9 +27,9 @@ package collections
 		function addAt(item:Object, index:int):void;
 		
 		/**
-		 * Returns the first <code>n</code> elements from this list. If <code>n</code>
+		 * Returns the first <code>n</code> elements from this sequence. If <code>n</code>
 		 * is greater than 1, the return type is an array of elements. Otherwise only the
-		 * element is returned, or <code>undefined</code> if the list is empty.
+		 * element is returned, or <code>undefined</code> if the sequence is empty.
 		 * 
 		 * @param count The number of elements to return.
 		 * @return An element, an array of elements, or <code>undefined</code>.
@@ -50,7 +37,7 @@ package collections
 		function first(count:int = 1):*;
 		
 		/**
-		 * Searches for the first occurrence in this list of the given element. This
+		 * Searches for the first occurrence in this sequence of the given element. This
 		 * method check if the given element has an <code>equals()</code> method. If
 		 * so, it will attempt to use this method to see if two objects are equal.
 		 * 
@@ -61,9 +48,21 @@ package collections
 		function indexOf(item:Object):int;
 		
 		/**
-		 * Returns the last <code>n</code> elements from this list. If <code>n</code>
+		 * Returns the element of this sequence that is stored at the given index.
+		 * If the index is less than 0 or is greater than or equal to the size of 
+		 * the sequence, a <code>RangeError</code> is thrown.
+		 * 
+		 * @param index The position of the item to return.
+		 * @return The item at the given position.
+		 * @throws RangeError If <code>index</code> is less than 0 or greater than
+		 * 	or equal to the size of the sequence.
+		 */
+		function at(index:int):*;
+		
+		/**
+		 * Returns the last <code>n</code> elements from this sequence. If <code>n</code>
 		 * is greater than 1, the return type is an array of elements. Otherwise only the
-		 * element is returned, or <code>undefined</code> if the list is empty.
+		 * element is returned, or <code>undefined</code> if the sequence is empty.
 		 * 
 		 * @param count The number of elements to return.
 		 * @return An element, an array of elements, or <code>undefined</code>.
@@ -71,29 +70,29 @@ package collections
 		function last(count:int = 1):*;
 		
 		/**
-		 * Removes and returns the last element in the list. If the list is empty,
+		 * Removes and returns the last element in the sequence. If the sequence is empty,
 		 * <code>undefined</code> is returned.
 		 * 
-		 * @return The last element in the list, or <code>undefined</code>.
+		 * @return The last element in the sequence, or <code>undefined</code>.
 		 */
 		function pop():*;
 		
 		/**
-		 * Returns a new list that contains the elements from this list between
+		 * Returns a new sequence that contains the elements from this sequence between
 		 * the starting index (inclusive) and the ending index (exclusive).
 		 * 
 		 * @param start The starting index. If a negative number, the starting 
-		 * 	point begins at the end of the list, where -1 is the last element.
+		 * 	point begins at the end of the sequence, where -1 is the last element.
 		 * @param end The ending index. If you omit this parameter, the range 
-		 * 	includes all elements from the starting point to the end of the list. 
+		 * 	includes all elements from the starting point to the end of the sequence. 
 		 * 	If the index is a negative number, the ending point is specified from 
-		 * 	the end of the list, where -1 is the last element.
-		 * @return A new list.
+		 * 	the end of the sequence, where -1 is the last element.
+		 * @return A new sequence.
 		 */
-		function range(start:int, end:int = int.MAX_VALUE):IList;
+		function slice(start:int, end:int = int.MAX_VALUE):ISequence;
 		
 		/**
-		 * Removes the element of this list that is stored at the given position.
+		 * Removes the element of this sequence that is stored at the given position.
 		 * 
 		 * @param index The position of the item to remove.
 		 * @return The object removed.
@@ -103,27 +102,27 @@ package collections
 		
 		/**
 		 * Replaces an element at the given position with the specified element. If
-		 * the index is the size of the list, the element is added to the end of the
-		 * list and <code>undefined</code> is returned.
+		 * the index is the size of the sequence, the element is added to the end of the
+		 * sequence and <code>undefined</code> is returned.
 		 * 
 		 * @param item The new item.
 		 * @param index The position of the item to replace.
 		 * @return The element that was replaced.
 		 * @throws RangeError If <code>index</code> is less than 0 or greater than
-		 * 	the size of the list.
+		 * 	the size of the sequence.
 		 */
 		function setItemAt(item:Object, index:int):*;
 		
 		/**
-		 * Removes and returns the first element in the list. If the list is empty,
+		 * Removes and returns the first element in the sequence. If the sequence is empty,
 		 * <code>undefined</code> is returned.
 		 * 
-		 * @return The first element in the list, or <code>undefined</code>.
+		 * @return The first element in the sequence, or <code>undefined</code>.
 		 */
 		function shift():*;
 		
 		/**
-		 * Returns a new list that is sorted according to the given function. This
+		 * Returns a new sequence that is sorted according to the given function. This
 		 * function should have the following signature: 
 		 * <code>function comparator(a:Object, b:Object):int</code>. If the returned
 		 * integer is negative, then <code>a</code> preceeds <code>b</code>. If the
@@ -131,12 +130,12 @@ package collections
 		 * <code>b</code>. If positive, then <code>a</code> appears after <code>b</code>. 
 		 * 
 		 * @param comparator The comparator function.
-		 * @return A new sorted list.
+		 * @return A new sorted sequence.
 		 */
-		function sort(comparator:Function):IList;
+		function sort(comparator:Function):ISequence;
 		
 		/**
-		 * Returns a new list that contains that elements that return <code>true</code> by
+		 * Returns a new sequence that contains that elements that return <code>true</code> by
 		 * the given block function. This function expects the following signature:
 		 * 
 		 * <p>
@@ -144,8 +143,8 @@ package collections
 		 * </p>
 		 * 
 		 * @param block The filter function.
-		 * @return A new list.
+		 * @return A new sequence.
 		 */
-		function where(block:Function):IList;
+		function where(block:Function):ISequence;
 	}
 }

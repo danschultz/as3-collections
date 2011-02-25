@@ -2,6 +2,7 @@ package collections
 {
 	
 	import org.flexunit.assertThat;
+	import org.hamcrest.collection.array;
 	import org.hamcrest.collection.hasItem;
 	import org.hamcrest.object.equalTo;
 	import org.hamcrest.object.nullValue;
@@ -225,6 +226,40 @@ package collections
 				}
 				assertThat("test failed for keyword '" + test + "'", error, nullValue());
 			}
+		}
+		
+		[Test]
+		public function testKeysAreOrdered():void
+		{
+			_map.put(1, 1);
+			_map.put(2, 1);
+			_map.put(3, 1);
+			_map.put(4, 1);
+			_map.put(2, 1);
+			_map.put(5, 1);
+			_map.put(6, 1);
+			_map.put(7, 1);
+			_map.put(3, 1);
+			_map.put(8, 1);
+			_map.put(9, 1);
+			
+			assertThat(_map.keys(), array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+		}
+		
+		[Test]
+		public function testForEachIn():void
+		{
+			_map.put(1, 1);
+			_map.put(2, 2);
+			_map.put(3, 3);
+			_map.put(4, 4);
+			_map.put(5, 5);
+			
+			var values:Array = [];
+			for each (var value:int in _map) {
+				values.push(value);
+			}
+			assertThat(values, array(1, 2, 3, 4, 5));
 		}
 	}
 }

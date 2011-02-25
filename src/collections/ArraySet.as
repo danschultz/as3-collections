@@ -4,6 +4,7 @@ package collections
 	
 	[RemoteClass(alias="collections.ArraySet")]
 	
+	[Deprecated(replacement="collections.HashSet", since="1.3.0", message="HashSet now supports ordering of its elements.")]
 	/**
 	 * An array set is a collection that does not contain duplicate items, and
 	 * guarentees the iteration order in which they're added. This collection may 
