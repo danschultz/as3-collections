@@ -4,7 +4,7 @@ package collections
 
 	[RemoteClass(alias="collections.ArrayList")]
 	
-	[Deprecated(replacement="collections.ArraySequence", since="1.3.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
+	[Deprecated(replacement="collections.ArraySequence", since="1.2.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
 	/**
 	 * A mutable list of elements that can contain duplicate elements. This 
 	 * collection supports <code>null</code> elements.

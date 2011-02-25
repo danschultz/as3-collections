@@ -4,7 +4,7 @@ package collections
 	
 	use namespace flash_proxy;
 	
-	[Deprecated(replacement="collections.Sequence", since="1.3.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
+	[Deprecated(replacement="collections.Sequence", since="1.2.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
 	/**
 	 * A base list implementation that provides a scaffolding for more specific types 
 	 * of lists. This class delegates the insertion, retrieval, search and removal to 

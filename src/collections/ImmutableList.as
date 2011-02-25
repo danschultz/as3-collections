@@ -1,6 +1,6 @@
 package collections
 {
-	[Deprecated(replacement="collections.ImmutableSequence", since="1.3.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
+	[Deprecated(replacement="collections.ImmutableSequence", since="1.2.0", message="In order to not conflict with Flex collections, Lists have been renamed to Sequences.")]
 	/**
 	 * An immutable collection that wraps a list.
 	 * 
